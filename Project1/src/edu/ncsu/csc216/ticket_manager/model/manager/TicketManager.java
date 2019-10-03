@@ -64,10 +64,10 @@ public class TicketManager {
 	
 	/**
 	 * This gets the Tickets (By Type of Ticket) into a format for displaying
-	 * @param ticketType
+	 * @param ticketType			The Type of ticket you would like to have displayed in the Array
 	 * @return		2D String array for displaying the Tickets
 	 */
-	public String[][] getTicketsForDisplayByType(TicketType ticketType){
+	public String[][] getTicketsForDisplayByType(TicketType ticketType) {
 		return null;
 	}
 	
