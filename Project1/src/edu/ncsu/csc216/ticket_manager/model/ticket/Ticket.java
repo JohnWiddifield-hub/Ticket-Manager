@@ -18,7 +18,7 @@ public class Ticket {
 	/**A constant String representation of state for TicketType*/
 	public static final String TT_REQUEST = "Request";
 	/**A constant String representation of state for TicketType*/
-	public static final String TT_INCIDENT ="Incident";
+	public static final String TT_INCIDENT = "Incident";
 	/**A constant String representation of state for Category*/
 	public static final String C_INQUIRY = "Inquiry";
 	/**A constant String representation of state for Category*/
@@ -160,7 +160,7 @@ public class Ticket {
 	
 	/**
 	 * This gets the CancellationCode for the Ticket
-	 * @return
+	 * @return 			The Ticket's CancellationCode
 	 */
 	public String getCancellationCode() {
 		return null;
@@ -168,7 +168,7 @@ public class Ticket {
 	
 	/**
 	 * This gets the Category for the Ticket
-	 * @return
+	 * @return			The Ticket's Category
 	 */
 	public String getCategory() {
 		return null;
@@ -176,7 +176,7 @@ public class Ticket {
 	
 	/**
 	 * This gets the FeedbackCode for the Ticket
-	 * @return
+	 * @return			The Ticket's Feedback Code 
 	 */
 	public String getFeedbackCode() {
 		return null;
@@ -356,7 +356,7 @@ public class Ticket {
 	 * @author John Widdifield
 	 *
 	 */
-	public class CanceledState implements TicketState{
+	public class CanceledState implements TicketState {
 		
 		/**
 		 * Constructs the canceled state object for the Ticket
@@ -388,7 +388,7 @@ public class Ticket {
 	 * @author John Widdifield
 	 *
 	 */
-	public class WorkingState implements TicketState{
+	public class WorkingState implements TicketState {
 		private WorkingState() {
 			
 		}
@@ -416,7 +416,7 @@ public class Ticket {
 	 * @author John Widdifield
 	 *
 	 */
-	public class NewState implements TicketState{
+	public class NewState implements TicketState {
 		private NewState() {
 			
 		}
@@ -445,7 +445,7 @@ public class Ticket {
 	 * @author John Widdifield
 	 *
 	 */
-	public class ResolvedState implements TicketState{
+	public class ResolvedState implements TicketState {
 		private ResolvedState() {
 			
 		}
@@ -474,7 +474,7 @@ public class Ticket {
 	 * @author John Widdifield
 	 *
 	 */
-	public class ClosedState implements TicketState{
+	public class ClosedState implements TicketState {
 		private ClosedState() {
 			
 		}
@@ -502,7 +502,7 @@ public class Ticket {
 	 * @author John Widdifield
 	 *
 	 */
-	public class FeedbackState implements TicketState{
+	public class FeedbackState implements TicketState {
 		private FeedbackState() {
 			
 		}

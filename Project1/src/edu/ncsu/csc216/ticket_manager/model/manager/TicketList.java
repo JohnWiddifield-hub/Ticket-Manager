@@ -74,8 +74,8 @@ public class TicketList {
 	
 	/**
 	 * Executes a Command on a Ticket inside of the list
-	 * @param id
-	 * @param command
+	 * @param id			ID of the Ticket to Execute a Command
+	 * @param command		Command to execute on the Ticket
 	 */
 	public void executeCommand(int id, Command command) {
 		
