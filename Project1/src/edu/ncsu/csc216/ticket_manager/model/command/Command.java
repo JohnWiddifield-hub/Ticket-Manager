@@ -43,6 +43,14 @@ public class Command {
 	public enum ResolutionCode { COMPLETED, NOT_COMPLETED, SOLVED, WORKAROUND, NOT_SOLVED, CALLER_CLOSED }
 	/** The enumeration for all possible values for a CancellationCode */
 	public enum CancellationCode { DUPLICATE, INAPPROPRIATE }
+	/** The current CommandValue of the command */
+	private CommandValue cV;
+	/** The current FeedbackCode of the command */
+	private FeedbackCode fC;
+	/** The current ResolutionCode of the command */
+	private ResolutionCode rC;
+	/** The current CancellationCode of the command */
+	private CancellationCode cC;
 	
 	/**
 	 * Constructs a command for a transition of state.
@@ -56,7 +64,26 @@ public class Command {
 	 * 			having a CommandValue of FEEDBACK with a null feedbackCode.
 	 */
 	public Command(CommandValue cV, String ownerId, FeedbackCode fC, ResolutionCode rC, CancellationCode cC, String note) {
+		if(cV == null) {
+			throw new IllegalArgumentException();
+		} else if(cV == CommandValue.PROCESS && (ownerId.isEmpty() || ownerId == null)) {
+			throw new IllegalArgumentException();
+		} else if(cV == CommandValue.FEEDBACK && fC == null) {
+			throw new IllegalArgumentException();
+		} else if(cV == CommandValue.RESOLVE && rC == null) {
+			throw new IllegalArgumentException();
+		} else if(cV == CommandValue.CANCEL && cC == null) {
+			throw new IllegalArgumentException();
+		} else if(note.isEmpty() || note == null) {
+			throw new IllegalArgumentException();
+		}
 		
+		this.cV = cV;
+		this.fC = fC;
+		this.rC = rC;
+		this.cC = cC;
+		this.ownerId = ownerId;
+		this.note = note;
 	}
 	
 	/** 
@@ -80,7 +107,7 @@ public class Command {
 	 * @return CommandValue of Command
 	 */
 	public CommandValue getCommand() {
-		return null;
+		return this.cV;
 	}
 	
 	/**
@@ -88,7 +115,7 @@ public class Command {
 	 * @return ResolutionCode for Command
 	 */
 	public ResolutionCode getResolutionCode() {
-		return null;
+		return this.rC
 	}
 	
 	/**
@@ -96,7 +123,7 @@ public class Command {
 	 * @return FeedbackCode for Command
 	 */
 	public FeedbackCode getFeedbackCode() {
-		return null;
+		return this.fC;
 	}
 	
 	/**
@@ -104,7 +131,7 @@ public class Command {
 	 * @return CancellationCode for the Command
 	 */
 	public CancellationCode getCancellationCode() {
-		return null;
+		return this.cC;
 	}
 	
 	
