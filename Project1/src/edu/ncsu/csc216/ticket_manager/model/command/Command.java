@@ -115,7 +115,7 @@ public class Command {
 	 * @return ResolutionCode for Command
 	 */
 	public ResolutionCode getResolutionCode() {
-		return this.rC
+		return this.rC;
 	}
 	
 	/**
