@@ -96,6 +96,14 @@ public class Ticket {
 	/** Instance of the concrete inner TicketState class CanceledState */
 	public final CanceledState canceledState = null;
 	
+/*	/** This holds the Ticket type for the Ticket 
+	private TicketType tT;
+	/** This holds the Priority type for the Ticket 
+	private Priority prior;
+	/** This holds the Category type for the Ticket 
+	private Category categ; */
+	
+	
 	/**
 	 * Constructs a Ticket object based on the Parameters
 	 * @param id			ID of the ticket
@@ -127,12 +135,40 @@ public class Ticket {
 	 * @throws IllegalArgumentException if any of the Params are null or empty Strings
 	 */
 	public Ticket(TicketType ticketType, String subject, String caller, Category category, Priority priority, String note) {
-		/*this.setCaller(caller);
+		this.setCaller(caller);
 		this.setSubject(subject);
-		this.setTicketType(ticketType);
-		this.setCategory(category);
-		this.setPriority(priority);
-		this.notes.add(note);*/
+		
+		if(ticketType == TicketType.INCIDENT) {
+			this.setTicketType(TT_INCIDENT);
+		} else if(ticketType == TicketType.REQUEST) {
+			this.setTicketType(TT_REQUEST);
+		}
+		
+		if(category == Category.DATABASE) {
+			this.setCategory(C_DATABASE);
+		} else if(category == Category.HARDWARE) {
+			this.setCategory(C_HARDWARE);
+		} else if(category == Category.INQUIRY) {
+			this.setCategory(C_INQUIRY);
+		} else if(category == Category.NETWORK) {
+			this.setCategory(C_NETWORK);
+		} else if(category == Category.SOFTWARE) {
+			this.setCategory(C_SOFTWARE);
+		}
+		
+		if(priority == Priority.HIGH) {
+			this.setPriority(P_HIGH);
+		} else if(priority == Priority.LOW) {
+			this.setPriority(P_LOW);
+		} else if(priority == Priority.MEDIUM) {
+			this.setPriority(P_MEDIUM);
+		} else if(priority == Priority.URGENT) {
+			this.setPriority(P_URGENT);
+		}
+		
+		this.notes.add(note);
+		
+		incrementCounter();
 	}
 	
 	/**
@@ -155,7 +191,7 @@ public class Ticket {
 	 * @return		Name of the Caller
 	 */
 	public String getCaller() {
-		return null;
+		return this.caller;
 	}
 	
 	/**
@@ -163,7 +199,9 @@ public class Ticket {
 	 * @return 			The Ticket's CancellationCode
 	 */
 	public String getCancellationCode() {
-		return null;
+		if(cancellationCode == CancellationCode.DUPLICATE) {
+			return C_DUPLICATE;
+		}
 	}
 	
 	/**

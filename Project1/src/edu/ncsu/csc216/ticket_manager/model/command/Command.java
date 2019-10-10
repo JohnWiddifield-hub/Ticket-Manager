@@ -66,7 +66,7 @@ public class Command {
 	public Command(CommandValue cV, String ownerId, FeedbackCode fC, ResolutionCode rC, CancellationCode cC, String note) {
 		if(cV == null) {
 			throw new IllegalArgumentException();
-		} else if(cV == CommandValue.PROCESS && (ownerId.isEmpty() || ownerId == null)) {
+		} else if(cV == CommandValue.PROCESS && (ownerId == null || ownerId.isEmpty())) {
 			throw new IllegalArgumentException();
 		} else if(cV == CommandValue.FEEDBACK && fC == null) {
 			throw new IllegalArgumentException();
@@ -74,7 +74,9 @@ public class Command {
 			throw new IllegalArgumentException();
 		} else if(cV == CommandValue.CANCEL && cC == null) {
 			throw new IllegalArgumentException();
-		} else if(note.isEmpty() || note == null) {
+		} else if(note == null) {
+			throw new IllegalArgumentException();
+		} else if(note.isEmpty()) {
 			throw new IllegalArgumentException();
 		}
 		
