@@ -199,9 +199,9 @@ public class Ticket {
 	 * @return 			The Ticket's CancellationCode
 	 */
 	public String getCancellationCode() {
-		if(cancellationCode == CancellationCode.DUPLICATE) {
-			return C_DUPLICATE;
-		}
+		//if(cancellationCode == CancellationCode.DUPLICATE) {
+			return null;
+		//}
 	}
 	
 	/**
