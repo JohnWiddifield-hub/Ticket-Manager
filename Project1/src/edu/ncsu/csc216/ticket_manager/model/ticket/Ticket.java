@@ -64,6 +64,8 @@ public class Ticket {
 	private ArrayList<String> notes;
 	/** The State of the Ticket */
 	private TicketState state;
+	/** The TicketType of the Ticket */
+	private TicketType ticketType;
 	/** The Category for the Ticket */
 	private Category category;
 	/** The Priority for the Ticket */
@@ -121,6 +123,135 @@ public class Ticket {
 	public Ticket(int id, String state, String ticketType, String subject, String caller, String category, 
 			String priority, String owner, String code, ArrayList<String> notes) {
 		
+		if(id >= 0) {
+			this.ticketId = id;
+		} else throw new IllegalArgumentException();
+		
+		if(state.contentEquals("New")) {
+			this.setState(state);
+		} else if (state.contentEquals("Working")) {
+			this.setState(state);
+		} else if (state.contentEquals("Feedback")) {
+			this.setState(state);
+		} else if (state.contentEquals("Resolved")) {
+			this.setState(state);
+		} else if (state.contentEquals("Closed")) {
+			this.setState(state);
+		} else if (state.contentEquals("Canceled")) {
+			this.setState(state);
+		} else throw new IllegalArgumentException();
+		
+		if(ticketType == TT_INCIDENT) {
+			this.setTicketType(ticketType);
+		} else if(ticketType == TT_REQUEST) {
+			this.setTicketType(ticketType);
+		} else throw new IllegalArgumentException();
+		
+		if(category == C_SOFTWARE) {
+			this.setCategory(C_SOFTWARE);
+		} else if(category == C_HARDWARE) {
+			this.setCategory(C_HARDWARE);
+		} else if(category == C_INQUIRY) {
+			this.setCategory(C_INQUIRY);
+		} else if(category == C_DATABASE) {
+			this.setCategory(C_DATABASE);
+		} else if(category == C_NETWORK) {
+			this.setCategory(C_NETWORK);
+		} else throw new IllegalArgumentException();
+		
+		if(priority == P_HIGH) {
+			this.setPriority(P_HIGH);
+		} else if(priority == P_MEDIUM) {
+			this.setPriority(P_MEDIUM);
+		} else if(priority == P_LOW) {
+			this.setPriority(P_LOW);
+		} else if(priority == P_URGENT) {
+			this.setPriority(P_URGENT);
+		} else throw new IllegalArgumentException();
+		
+		if(owner.isEmpty() && state == "Working") {
+			throw new IllegalArgumentException();
+		} else if(owner.isEmpty() && state == "Feedback") {
+			throw new IllegalArgumentException();
+		} else if(owner.isEmpty() && state == "Resolved") {
+			throw new IllegalArgumentException();
+		} else if(owner.isEmpty() && state == "Closed") {
+			throw new IllegalArgumentException();
+		}
+		
+		if(state == "Feedback" && code == "Awaiting Provider") {
+			this.setFeedbackCode("Awaiting Provider");
+		} else if(state == "Feedback" && code == "Awaiting Caller") {
+			this.setFeedbackCode("Awaiting Caller");
+		} else if(state == "Feedback" && code == "Awaiting Change") {
+			this.setFeedbackCode("Awaiting Change");
+		} else if(state == "Feedback") {
+			throw new IllegalArgumentException();
+		}
+		
+		if(state == "Resolved" && code == "Completed") {
+			this.setResolutionCode("Completed");
+		} else if(state == "Resolved" && code == "Not Completed") {
+			this.setResolutionCode("Not Completed");
+		} else if(state == "Resolved" && code == "Solved") {
+			this.setResolutionCode("Solved");
+		} else if(state == "Resolved" && code == "Workaround") {
+			this.setResolutionCode("Workaround");
+		} else if(state == "Resolved" && code == "Not Solved") {
+			this.setResolutionCode("Not Solved");
+		} else if(state == "Resolved" && code == "Caller Closed") {
+			this.setResolutionCode("Caller Closed");
+		} else if(state == "Resolved") {
+			throw new IllegalArgumentException();
+		}
+		
+		if(state == "Closed" && code == "Completed") {
+			this.setResolutionCode("Completed");
+		} else if(state == "Closed" && code == "Not Completed") {
+			this.setResolutionCode("Not Completed");
+		} else if(state == "Closed" && code == "Solved") {
+			this.setResolutionCode("Solved");
+		} else if(state == "Closed" && code == "Workaround") {
+			this.setResolutionCode("Workaround");
+		} else if(state == "Closed" && code == "Not Solved") {
+			this.setResolutionCode("Not Solved");
+		} else if(state == "Closed" && code == "Caller Closed") {
+			this.setResolutionCode("Caller Closed");
+		} else if(state == "Closed") {
+			throw new IllegalArgumentException();
+		}
+		
+		if(state == "Incident" && code == "Caller Closed") {
+			this.setResolutionCode("Caller Closed");
+		} else if(state == "Incident" && code == "Solved") {
+			this.setResolutionCode("Solved");
+		} else if(state == "Incident" && code == "Workaround") {
+			this.setResolutionCode("Workaround");
+		} else if(state == "Incident" && code == "Not Solved") {
+			this.setResolutionCode("Not Solved");
+		} else if(state == "Incident") {
+			throw new IllegalArgumentException();
+		}
+		
+		if(state.contentEquals("Canceled") && code == "Duplicate") {
+			this.setCancellationCode("Duplicate");
+		} else if(state == "Canceled" && code == "Inappropriate") {
+			this.setCancellationCode("Inappropriate");
+		} else if(state == "Canceled") {
+			throw new IllegalArgumentException();
+		}
+		
+		this.setSubject(subject);
+		this.setCaller(caller);
+		this.setOwner(owner);
+		
+		for (int i = 0; i < notes.size(); i++) {
+			this.notes.add(notes.get(i));
+		}
+		
+		if(id > counter) {
+		setCounter(id + 1);
+		}
 	}
 	
 	/**
@@ -166,9 +297,16 @@ public class Ticket {
 			this.setPriority(P_URGENT);
 		}
 		
+		if(note == "" || note.isEmpty()) {
+			throw new IllegalArgumentException();
+		} else {
 		this.notes.add(note);
+		}
 		
-		incrementCounter();
+		this.state = newState;
+		this.owner = "";
+		this.ticketId = counter;
+		Ticket.incrementCounter();
 	}
 	
 	/**
@@ -183,7 +321,7 @@ public class Ticket {
 	 * @param cntr		ID to set the Counter to
 	 */
 	public static void setCounter(int cntr) {
-		
+		counter = cntr;
 	}
 
 	/**
@@ -199,9 +337,9 @@ public class Ticket {
 	 * @return 			The Ticket's CancellationCode
 	 */
 	public String getCancellationCode() {
-		//if(cancellationCode == CancellationCode.DUPLICATE) {
-			return null;
-		//}
+		if(cancellationCode == CancellationCode.DUPLICATE){
+			return "Duplicate";
+		} else return "Inappropriate";
 	}
 	
 	/**
@@ -209,7 +347,15 @@ public class Ticket {
 	 * @return			The Ticket's Category
 	 */
 	public String getCategory() {
-		return null;
+		if(category == Category.DATABASE) {
+			return "Database";
+		} else if(category == Category.HARDWARE) {
+			return "Hardware";
+		} else if(category == Category.INQUIRY) {
+			return "Inquiry";
+		} else if(category == Category.NETWORK) {
+			return "Network";
+		} else return "Software";
 	}
 	
 	/**
@@ -217,7 +363,11 @@ public class Ticket {
 	 * @return			The Ticket's Feedback Code 
 	 */
 	public String getFeedbackCode() {
-		return null;
+		if(feedbackCode == FeedbackCode.AWAITING_CALLER) {
+			return "Awaiting Caller";
+		} else if(feedbackCode== FeedbackCode.AWAITING_CHANGE) {
+			return "Awaiting Change";
+		} else return "Awaiting Provider";
 	}
 	
 	/**
@@ -225,7 +375,13 @@ public class Ticket {
 	 * @return		String representation of the Ticket's notes
 	 */
 	public String getNotes() {
-		return null;
+		String output = "";
+		for(int i = 0; i < notes.size(); i++) {
+			output.concat("-");
+			output.concat(notes.get(i));
+			output.concat("\n");
+		}
+		return output;
 	}
 	
 	/**
@@ -233,7 +389,7 @@ public class Ticket {
 	 * @return		Owner of the Ticket
 	 */
 	public String getOwner() {
-		return null;
+		return owner;
 	}
 	
 	/** 
@@ -241,7 +397,13 @@ public class Ticket {
 	 * @return 	Priority of the Ticket
 	 */
 	public String getPriority() {
-		return null;
+		if(priority == Priority.HIGH) {
+			return "High";
+		} else if(priority == Priority.LOW) {
+			return "Low";
+		} else if(priority == Priority.MEDIUM) {
+			return "Medium";
+		} else return "Urgent";
 	}
 	
 	/**
@@ -249,7 +411,19 @@ public class Ticket {
 	 * @return		ResolutionCode of the Ticket
 	 */
 	public String getResolutionCode() {
-		return null;
+		if(resolutionCode == ResolutionCode.CALLER_CLOSED) {
+			return "Caller Closed";
+		} else if(resolutionCode == ResolutionCode.COMPLETED) {
+			return "Completed";
+		} else if(resolutionCode == ResolutionCode.NOT_COMPLETED) {
+			return "Not Completed";
+		} else if(resolutionCode == ResolutionCode.NOT_SOLVED) {
+			return "Not Solved";
+		} else if(resolutionCode == ResolutionCode.SOLVED) {
+			return "Solved";
+		} else {
+			return "Workaround";
+		}
 	}
 	
 	/**
@@ -257,7 +431,19 @@ public class Ticket {
 	 * @return		Ticket's state as a String
 	 */
 	public String getState() {
-		return null;
+		if(state instanceof NewState) {
+			return "New";
+		} else if(state instanceof WorkingState) {
+			return "Working";
+		} else if(state instanceof CanceledState) {
+			return "Canceled";
+		} else if(state instanceof ResolvedState) {
+				return "Resolved";
+		} else if(state instanceof ClosedState) {
+			return "Closed";
+		} else {
+			return "Feedback";
+		}
 	}
 	
 	/**
@@ -265,7 +451,7 @@ public class Ticket {
 	 * @return 	Ticket's Subject
 	 */
 	public String getSubject() {
-		return null;
+		return subject;
 	}
 	
 	/**
@@ -273,7 +459,8 @@ public class Ticket {
 	 * @return	ID of the Ticket
 	 */
 	public String getTicketId() {
-		return null;
+		String str = Integer.toString(ticketId);
+		return str;
 	}
 	
 	/**
@@ -281,7 +468,7 @@ public class Ticket {
 	 * @return	The TicketType for the Ticket
 	 */
 	public TicketType getTicketType() {
-		return null;
+		return ticketType;
 	}
 	
 	/**
@@ -289,7 +476,9 @@ public class Ticket {
 	 * @return A String representation of the Ticket's type
 	 */
 	public String getTicketTypeString() {
-		return null;
+		if(ticketType == TicketType.INCIDENT) {
+			return "Incident";
+		} else return "Request";
 	}
 	
 	/**
@@ -297,7 +486,11 @@ public class Ticket {
 	 * @param caller	String to set the caller's name equal to
 	 */
 	private void setCaller(String caller) {
-		
+		if(caller == null) {
+			throw new IllegalArgumentException();
+		} else if(caller.isEmpty()) {
+			throw new IllegalArgumentException();
+		} else this.caller = caller;
 	}
 	
 	/**
@@ -305,7 +498,11 @@ public class Ticket {
 	 * @param cancellationCode 		The String representation of the CancellationCode to set for the Ticket
 	 */
 	private void setCancellationCode(String cancellationCode) {
-		
+		if(cancellationCode.contentEquals("Duplicate")) {
+			this.cancellationCode = CancellationCode.DUPLICATE;
+		} else if(cancellationCode.contentEquals("Inappropriate")) {
+			this.cancellationCode = CancellationCode.INAPPROPRIATE;
+		} else throw new IllegalArgumentException();
 	}
 	
 	/**
@@ -313,7 +510,17 @@ public class Ticket {
 	 * @param category		Category to set the Ticket to
 	 */
 	private void setCategory(String category) {
-		
+		if(category.contentEquals("Software")) {
+			this.category = Category.SOFTWARE;
+		} else if(category.contentEquals("Hardware")) {
+			this.category = Category.HARDWARE;
+		} else if(category.contentEquals("Network")) {
+			this.category = Category.NETWORK;
+		} else if(category.contentEquals("Inquiry")) {
+			this.category = Category.INQUIRY;
+		} else if(category.contentEquals("Database")) {
+			this.category = Category.DATABASE;
+		} else throw new IllegalArgumentException();
 	}
 	
 	/**
@@ -321,7 +528,7 @@ public class Ticket {
 	 * @param owner			Owner to set for the Ticket
 	 */
 	private void setOwner(String owner) {
-		
+		this.owner = owner;
 	}
 	
 	/**
@@ -329,7 +536,14 @@ public class Ticket {
 	 * @param feedbackCode			feedbackCode to set for the Ticket
 	 */
 	private void setFeedbackCode(String feedbackCode) {
-	
+		if(feedbackCode.contentEquals("Awaiting Caller")) {
+			this.feedbackCode = FeedbackCode.AWAITING_CALLER;
+		} else if(feedbackCode.contentEquals("Awaiting Provider")) {
+			this.feedbackCode = FeedbackCode.AWAITING_PROVIDER;
+		} else if(feedbackCode.contentEquals("Awaiting Change")) {
+			this.feedbackCode = FeedbackCode.AWAITING_CHANGE;
+		} else throw new IllegalArgumentException();
+			
 	}
 	
 	/**
@@ -337,7 +551,15 @@ public class Ticket {
 	 * @param priority
 	 */
 	private void setPriority(String priority) {
-		
+		if(priority.contentEquals("High")) {
+			this.priority = Priority.HIGH;
+		} else if(priority.contentEquals("Low")) {
+			this.priority = Priority.LOW;
+		} else if(priority.contentEquals("Medium")) {
+			this.priority = Priority.MEDIUM;
+		} else if(priority.contentEquals("Ugent")) {
+			this.priority = Priority.URGENT;
+		} else throw new IllegalArgumentException();
 	}
 	
 	/**
@@ -345,7 +567,19 @@ public class Ticket {
 	 * @param resolutionCode		ResolutionCode to set for the Ticket
 	 */
 	private void setResolutionCode(String resolutionCode) {
-		
+		if(resolutionCode.contentEquals("Completed")) {
+			this.resolutionCode = ResolutionCode.COMPLETED;
+		} else if(resolutionCode.contentEquals("Not Completed")) {
+			this.resolutionCode = ResolutionCode.NOT_COMPLETED;
+		} else if(resolutionCode.contentEquals("Solved")) {
+			this.resolutionCode = ResolutionCode.SOLVED;
+		} else if(resolutionCode.contentEquals("Not Solved")) {
+			this.resolutionCode = ResolutionCode.NOT_SOLVED;
+		} else if(resolutionCode.contentEquals("Workaround")) {
+			this.resolutionCode = ResolutionCode.WORKAROUND;
+		} else if(resolutionCode.contentEquals("Caller Closed")) {
+			this.resolutionCode = ResolutionCode.CALLER_CLOSED;
+		} else throw new IllegalArgumentException();
 	}
 	
 	/**
@@ -353,7 +587,6 @@ public class Ticket {
 	 * @param state		State the Ticket should be in
 	 */
 	private void setState(String state) {
-		
 	}
 	
 	/**
@@ -361,7 +594,11 @@ public class Ticket {
 	 * @param subject		Subject for the Ticket
 	 */
 	private void setSubject(String subject) {
-		
+		if(subject == null) {
+			throw new IllegalArgumentException();
+		} else if(subject.isEmpty()) {
+			throw new IllegalArgumentException();
+		} else this.subject = subject;
 	}
 	
 	/**
@@ -369,7 +606,11 @@ public class Ticket {
 	 * @param ticketType		TicketType to set the ticket to
 	 */
 	private void setTicketType(String ticketType) {
-		
+		if(ticketType == TT_INCIDENT) {
+			this.ticketType = TicketType.INCIDENT;
+		} else if(ticketType == TT_REQUEST) {
+			this.ticketType = TicketType.REQUEST;
+		} else throw new IllegalArgumentException();
 	}
 	
 	/**
@@ -377,7 +618,13 @@ public class Ticket {
 	 * @return String representation of a Ticket
 	 */
 	public String toString() {
-		return null;
+		String output = "*" + ticketId + "#" + state.getStateName() + "#" + subject + "#" + caller + "#" + getCategory()
+		 + "#" + getPriority() + "#" + getOwner() + "#";
+		
+		//TODO add the code relevant for the state and add the notes using \n getNote()
+		
+		return output;
+		
 	}
 	
 	/**
