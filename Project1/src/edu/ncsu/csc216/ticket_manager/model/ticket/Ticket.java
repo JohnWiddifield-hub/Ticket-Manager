@@ -657,7 +657,7 @@ public class Ticket {
 	 * @param command		Command to execute on the Ticket
 	 */
 	public void update(Command command) {
-		
+		state.updateState(command);
 	}
 	
 	/**
