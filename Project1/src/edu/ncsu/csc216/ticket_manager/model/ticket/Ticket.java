@@ -169,75 +169,75 @@ public class Ticket {
 			this.setPriority(P_URGENT);
 		} else throw new IllegalArgumentException();
 		
-		if(owner.isEmpty() && state == "Working") {
+		if(owner.isEmpty() && state.equals("Working")) {
 			throw new IllegalArgumentException();
-		} else if(owner.isEmpty() && state == "Feedback") {
+		} else if(owner.isEmpty() && state.equals("Feedback")) {
 			throw new IllegalArgumentException();
-		} else if(owner.isEmpty() && state == "Resolved") {
+		} else if(owner.isEmpty() && state.equals("Resolved")) {
 			throw new IllegalArgumentException();
-		} else if(owner.isEmpty() && state == "Closed") {
+		} else if(owner.isEmpty() && state.equals("Closed")) {
 			throw new IllegalArgumentException();
 		}
 		
-		if(state == "Feedback" && code == "Awaiting Provider") {
+		if(state.equals("Feedback") && code.equals("Awaiting Provider")) {
 			this.setFeedbackCode("Awaiting Provider");
-		} else if(state == "Feedback" && code == "Awaiting Caller") {
+		} else if(state.equals("Feedback") && code.equals("Awaiting Caller")) {
 			this.setFeedbackCode("Awaiting Caller");
-		} else if(state == "Feedback" && code == "Awaiting Change") {
+		} else if(state.equals("Feedback") && code.equals("Awaiting Change")) {
 			this.setFeedbackCode("Awaiting Change");
-		} else if(state == "Feedback") {
+		} else if(state.equals("Feedback")) {
 			throw new IllegalArgumentException();
 		}
 		
-		if(state == "Resolved" && code == "Completed") {
+		if(state.equals("Resolved") && code.equals("Completed")) {
 			this.setResolutionCode("Completed");
-		} else if(state == "Resolved" && code == "Not Completed") {
+		} else if(state.equals("Resolved") && code.equals("Not Completed")) {
 			this.setResolutionCode("Not Completed");
-		} else if(state == "Resolved" && code == "Solved") {
+		} else if(state.equals("Resolved") && code.equals("Solved")) {
 			this.setResolutionCode("Solved");
-		} else if(state == "Resolved" && code == "Workaround") {
+		} else if(state.equals("Resolved") && code.equals("Workaround")) {
 			this.setResolutionCode("Workaround");
-		} else if(state == "Resolved" && code == "Not Solved") {
+		} else if(state.equals("Resolved") && code.equals("Not Solved")) {
 			this.setResolutionCode("Not Solved");
-		} else if(state == "Resolved" && code == "Caller Closed") {
+		} else if(state.equals("Resolved") && code.equals("Caller Closed")) {
 			this.setResolutionCode("Caller Closed");
-		} else if(state == "Resolved") {
+		} else if(state.equals("Resolved")) {
 			throw new IllegalArgumentException();
 		}
 		
-		if(state == "Closed" && code == "Completed") {
+		if(state.equals("Closed") && code.equals("Completed")) {
 			this.setResolutionCode("Completed");
-		} else if(state == "Closed" && code == "Not Completed") {
+		} else if(state.equals("Closed") && code.equals("Not Completed")) {
 			this.setResolutionCode("Not Completed");
-		} else if(state == "Closed" && code == "Solved") {
+		} else if(state.equals("Closed") && code.equals("Solved")) {
 			this.setResolutionCode("Solved");
-		} else if(state == "Closed" && code == "Workaround") {
+		} else if(state.equals("Closed") && code.equals("Workaround")) {
 			this.setResolutionCode("Workaround");
-		} else if(state == "Closed" && code == "Not Solved") {
+		} else if(state.equals("Closed") && code.equals("Not Solved")) {
 			this.setResolutionCode("Not Solved");
-		} else if(state == "Closed" && code == "Caller Closed") {
+		} else if(state.equals("Closed") && code.equals("Caller Closed")) {
 			this.setResolutionCode("Caller Closed");
-		} else if(state == "Closed") {
+		} else if(state.equals("Closed")) {
 			throw new IllegalArgumentException();
 		}
 		
-		if(state == "Incident" && code == "Caller Closed") {
+		if(ticketType == TT_INCIDENT && code.equals("Caller Closed")) {
 			this.setResolutionCode("Caller Closed");
-		} else if(state == "Incident" && code == "Solved") {
+		} else if(ticketType == TT_INCIDENT && code.equals("Solved")) {
 			this.setResolutionCode("Solved");
-		} else if(state == "Incident" && code == "Workaround") {
+		} else if(ticketType == TT_INCIDENT && code.equals("Workaround")) {
 			this.setResolutionCode("Workaround");
-		} else if(state == "Incident" && code == "Not Solved") {
+		} else if(ticketType == TT_INCIDENT && code.equals("Not Solved")) {
 			this.setResolutionCode("Not Solved");
-		} else if(state == "Incident") {
+		} else if(ticketType == TT_INCIDENT) {
 			throw new IllegalArgumentException();
 		}
 		
-		if(state.contentEquals("Canceled") && code == "Duplicate") {
+		if(state.contentEquals("Canceled") && code.equals("Duplicate")) {
 			this.setCancellationCode("Duplicate");
-		} else if(state == "Canceled" && code == "Inappropriate") {
+		} else if(state.equals("Canceled") && code.equals("Inappropriate")) {
 			this.setCancellationCode("Inappropriate");
-		} else if(state == "Canceled") {
+		} else if(state.equals("Canceled")) {
 			throw new IllegalArgumentException();
 		}
 		
@@ -297,7 +297,7 @@ public class Ticket {
 			this.setPriority(P_URGENT);
 		}
 		
-		if(note == "" || note.isEmpty()) {
+		if(note.equals("") || note.isEmpty()) {
 			throw new IllegalArgumentException();
 		} else {
 		this.notes.add(note);
@@ -587,6 +587,19 @@ public class Ticket {
 	 * @param state		State the Ticket should be in
 	 */
 	private void setState(String state) {
+		if (state.contentEquals(CANCELED_NAME)) {
+			this.state = canceledState;
+		} else if(state.contentEquals(WORKING_NAME)) {
+			this.state = workingState;
+		} else if(state.contentEquals(CLOSED_NAME)) {
+			this.state = closedState;
+		} else if(state.contentEquals(FEEDBACK_NAME)) {
+			this.state = feedbackState;
+		} else if(state.contentEquals(NEW_NAME)) {
+			this.state = newState;
+		} else if(state.contentEquals(RESOLVED_NAME)) {
+			this.state = resolvedState;
+		} else return;
 	}
 	
 	/**
@@ -618,10 +631,22 @@ public class Ticket {
 	 * @return String representation of a Ticket
 	 */
 	public String toString() {
+		
 		String output = "*" + ticketId + "#" + state.getStateName() + "#" + subject + "#" + caller + "#" + getCategory()
 		 + "#" + getPriority() + "#" + getOwner() + "#";
+
+		if (state instanceof CanceledState) {
+			output.concat(this.getCancellationCode());
+		} else if(state instanceof ClosedState) {
+			output.concat(this.getResolutionCode());
+		} else if(state instanceof FeedbackState) {
+			output.concat(this.getFeedbackCode());
+		} else if(state instanceof ResolvedState) {
+			output.concat(this.getResolutionCode());
+		} 
 		
-		//TODO add the code relevant for the state and add the notes using \n getNote()
+		output.concat("\n");
+		output.concat(this.getNotes());
 		
 		return output;
 		
@@ -655,7 +680,7 @@ public class Ticket {
 		 * @return 			String representing the state
 		 */
 		public String getStateName() {
-			return null;
+			return CANCELED_NAME;
 		}
 		
 		/**
@@ -663,7 +688,7 @@ public class Ticket {
 		 * @param command		Command you would like to execute on the state
 		 */
 		public void updateState(Command command) {
-			
+			throw new UnsupportedOperationException();
 		}
 	}
 	
@@ -683,7 +708,7 @@ public class Ticket {
 		 * @return 			String representing the state
 		 */
 		public String getStateName() {
-			return null;
+			return WORKING_NAME;
 		}
 		
 		/**
@@ -691,7 +716,19 @@ public class Ticket {
 		 * @param command		Command you would like to execute on the state
 		 */
 		public void updateState(Command command) {
-			
+			if(command.getCommand() == Command.CommandValue.FEEDBACK) {
+				state = feedbackState;
+				feedbackCode = command.getFeedbackCode();
+				notes.add(command.getNote());
+			} else if(command.getCommand() == Command.CommandValue.RESOLVE) {
+				state = resolvedState;
+				resolutionCode = command.getResolutionCode();
+				notes.add(command.getNote());
+			} else if(command.getCommand() == Command.CommandValue.CANCEL) {
+				state = canceledState;
+				cancellationCode = command.getCancellationCode();
+				notes.add(command.getNote());
+			} else throw new UnsupportedOperationException();
 		}
 	}
 	
@@ -711,7 +748,7 @@ public class Ticket {
 		 * @return 			String representing the state
 		 */
 		public String getStateName() {
-			return null;
+			return NEW_NAME;
 		}
 		
 		/**
@@ -719,7 +756,14 @@ public class Ticket {
 		 * @param command		Command you would like to execute on the state
 		 */
 		public void updateState(Command command) {
-			
+			if(command.getCommand() == Command.CommandValue.PROCESS) {
+				state = workingState;
+				notes.add(command.getNote());
+			} else if(command.getCommand() == Command.CommandValue.CANCEL) {
+				state = canceledState;
+				cancellationCode = command.getCancellationCode();
+				notes.add(command.getNote());
+			} else throw new UnsupportedOperationException();
 		}
 	}
 	
@@ -740,7 +784,7 @@ public class Ticket {
 		 * @return 			String representing the state
 		 */
 		public String getStateName() {
-			return null;
+			return RESOLVED_NAME;
 		}
 		
 		/**
@@ -748,7 +792,19 @@ public class Ticket {
 		 * @param command		Command you would like to execute on the state
 		 */
 		public void updateState(Command command) {
-			
+			if(command.getCommand() == Command.CommandValue.FEEDBACK) {
+				state = feedbackState;
+				resolutionCode = null;
+				feedbackCode = command.getFeedbackCode();
+				notes.add(command.getNote());
+			} else if(command.getCommand() == Command.CommandValue.REOPEN) {
+				state = workingState;
+				resolutionCode = null;
+				notes.add(command.getNote());
+			} else if(command.getCommand() == Command.CommandValue.CONFIRM) {
+				state = closedState;
+				notes.add(command.getNote());
+			} else throw new UnsupportedOperationException();
 		}
 	}
 	
@@ -769,7 +825,7 @@ public class Ticket {
 		 * @return 			String representing the state
 		 */
 		public String getStateName() {
-			return null;
+			return CLOSED_NAME;
 		}
 		
 		/**
@@ -777,7 +833,10 @@ public class Ticket {
 		 * @param command		Command you would like to execute on the state
 		 */
 		public void updateState(Command command) {
-			
+			if(command.getCommand() == Command.CommandValue.REOPEN) {
+				state = workingState;
+				notes.add(command.getNote());
+			} else throw new UnsupportedOperationException();
 		}
 	}
 	
@@ -797,7 +856,7 @@ public class Ticket {
 		 * @return 			String representing the state
 		 */
 		public String getStateName() {
-			return null;
+			return FEEDBACK_NAME;
 		}
 		
 		/**
@@ -805,7 +864,16 @@ public class Ticket {
 		 * @param command		Command you would like to execute on the state
 		 */
 		public void updateState(Command command) {
-			
+			if(command.getCommand() == Command.CommandValue.REOPEN) {
+				state = workingState;
+				notes.add(command.getNote());
+			} else if(command.getCommand() == Command.CommandValue.RESOLVE) {
+				state = resolvedState;
+				notes.add(command.getNote());
+			} else if(command.getCommand() == Command.CommandValue.CANCEL) {
+				state = canceledState;
+				notes.add(command.getNote());
+			} else throw new UnsupportedOperationException();
 		}
 	}
 	
