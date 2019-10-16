@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import org.junit.Test;
 
+import edu.ncsu.csc216.ticket_manager.model.command.Command;
 import edu.ncsu.csc216.ticket_manager.model.ticket.Ticket.Category;
 import edu.ncsu.csc216.ticket_manager.model.ticket.Ticket.Priority;
 import edu.ncsu.csc216.ticket_manager.model.ticket.Ticket.TicketType;
@@ -560,91 +561,204 @@ public class TicketTest {
 	}
 
 	/**
-	 * Tests the incrementCounter method for correct implemintation
-	 */
-	@Test
-	public void testIncrementCounter() {
-		fail("Not yet implemented");
-	}
-
-	/**
-	 * Tests the getCancellationCode method for correct implemintation
-	 */
-	@Test
-	public void testGetCancellationCode() {
-		fail("Not yet implemented");
-	}
-
-	/**
-	 * Tests the getPriority method for correct implemintation
-	 */
-	@Test
-	public void testGetPriority() {
-		fail("Not yet implemented");
-	}
-
-	/**
-	 * Tests the getResolutionCode method for correct implemintation
-	 */
-	@Test
-	public void testGetResolutionCode() {
-		fail("Not yet implemented");
-	}
-
-	/**
-	 * Tests the getState method for correct implemintation
-	 */
-	@Test
-	public void testGetState() {
-		fail("Not yet implemented");
-	}
-
-	/**
-	 * Tests the getSubject method for correct implemintation
-	 */
-	@Test
-	public void testGetSubject() {
-		fail("Not yet implemented");
-	}
-
-	/**
-	 * Tests the getTicketId method for correct implemintation
-	 */
-	@Test
-	public void testGetTicketId() {
-		fail("Not yet implemented");
-	}
-
-	/**
-	 * Tests the getTicketType method for correct implemintation
-	 */
-	@Test
-	public void testGetTicketType() {
-		fail("Not yet implemented");
-	}
-
-	/**
-	 * Tests the getTicketTypeString method for correct implemintation
-	 */
-	@Test
-	public void testGetTicketTypeString() {
-		fail("Not yet implemented");
-	}
-
-	/**
 	 * Tests the toString method for correct implemintation
 	 */
 	@Test
 	public void testToString() {
-		fail("Not yet implemented");
-	}
+		ArrayList<String> note = new ArrayList<String>();
+		note.add("Me have bad computer");
+		note.add("Me want bigger computer");
+		note.add("Me need u get me this computer");
+		
+		Ticket t = new Ticket(1, "New", "Request", "Me want new computer", "jfwiddif", "Hardware", 
+				"High", "bbaggins", null, note);
+		
+		String truString = "*1#New#Request#Me want new computer#jfwiddif#Hardware#High#bbaggins#"
+				+ "\n-Me have bad computer\n-Me want bigger computer\n-Me need u get me this computer\n";
+		assertEquals(t.toString(), truString);
 
+	}
+	
 	/**
-	 * Tests the update method for correct implemintation
+	 * Tests the getNotes method for proper returning of notes.
 	 */
 	@Test
-	public void testUpdate() {
-		fail("Not yet implemented");
+	public void testGetNotes() {
+		ArrayList<String> note = new ArrayList<String>();
+		note.add("Me have bad computer");
+		note.add("Me want bigger computer");
+		note.add("Me need u get me this computer");
+		
+		Ticket t = new Ticket(1, "New", "Request", "Me want new computer", "jfwiddif", "Hardware", 
+				"High", "bbaggins", null, note);
+		
+		assertEquals(t.getNotes(), "-Me have bad computer\n-Me want bigger computer\n-Me need u get me this computer\n");
+		
+		ArrayList<String> note2 = new ArrayList<String>();
+		note2.add("Me need u get me this computer");
+		
+		t = new Ticket(1, "New", "Request", "Me want new computer", "jfwiddif", "Hardware", 
+				"High", "bbaggins", null, note2);
+		
+		assertEquals(t.getNotes(), "-Me need u get me this computer\n");
 	}
+	
+	@Test
+	public void testStatePattern() {
+		Ticket t = new Ticket(TicketType.INCIDENT, "subject", "caller", 
+				Category.NETWORK, Priority.HIGH, "note");
+		Command c;
+		
+		assertEquals(t.getState(), "New");
+		c = new Command(Command.CommandValue.PROCESS, "ownerId", null, null, null, "a note");
+		t.update(c);
+		assertEquals(t.getState(), "Working");
+		assertEquals(t.getOwner(), "ownerId");
+		
+		c = new Command(Command.CommandValue.RESOLVE, null, null, Command.ResolutionCode.SOLVED, null, "a note");
+		t.update(c);
+		assertEquals(t.getState(), "Resolved");
+		assertEquals(t.getOwner(), "ownerId");
+		assertEquals(t.getResolutionCode(), "Solved");
+		
+		c = new Command(Command.CommandValue.FEEDBACK, null, Command.FeedbackCode.AWAITING_CALLER, null, null, "a note");
+		t.update(c);
+		assertEquals(t.getState(), "Feedback");
+		assertEquals(t.getOwner(), "ownerId");
+		assertEquals(t.getFeedbackCode(), "Awaiting Caller");
+		
+		
+		t = new Ticket(TicketType.INCIDENT, "subject", "caller", 
+				Category.NETWORK, Priority.HIGH, "note");
+		c = new Command(Command.CommandValue.PROCESS, "ownerId2", null, null, null, "a note");
+		t.update(c);
+		assertEquals(t.getState(), "Working");
+		assertEquals(t.getOwner(), "ownerId2");
+		
+		c = new Command(Command.CommandValue.RESOLVE, null, null, Command.ResolutionCode.COMPLETED, null, "a note");
+		t.update(c);
+		assertEquals(t.getState(), "Resolved");
+		assertEquals(t.getOwner(), "ownerId2");
+		assertEquals(t.getResolutionCode(), "Completed");
+		
+		c = new Command(Command.CommandValue.CONFIRM, null, null, null, null, "a note");
+		t.update(c);
+		assertEquals(t.getState(), "Closed");
+		assertEquals(t.getOwner(), "ownerId2");
+		assertEquals(t.getResolutionCode(), "Completed");
+		
+		c = new Command(Command.CommandValue.REOPEN, "ownerId2", null, null, null, "a note");
+		t.update(c);
+		assertEquals(t.getState(), "Working");
+		assertEquals(t.getOwner(), "ownerId2");
+		
+		t = new Ticket(TicketType.REQUEST, "subject", "caller", 
+				Category.NETWORK, Priority.HIGH, "note");
+		c = new Command(Command.CommandValue.CANCEL, null, null, null, Command.CancellationCode.DUPLICATE, "a note");
+		t.update(c);
+		assertEquals(t.getState(), "Canceled");
+		assertEquals(t.getCancellationCode(), "Duplicate");
+		
+		t = new Ticket(TicketType.REQUEST, "subject", "caller", 
+				Category.NETWORK, Priority.HIGH, "note");
+		c = new Command(Command.CommandValue.CANCEL, null, null, null, Command.CancellationCode.INAPPROPRIATE, "a note");
+		t.update(c);
+		assertEquals(t.getState(), "Canceled");
+		assertEquals(t.getCancellationCode(), "Inappropriate");
+		
+		t = new Ticket(TicketType.REQUEST, "subject", "caller", 
+				Category.NETWORK, Priority.HIGH, "note");
+		c = new Command(Command.CommandValue.PROCESS, "owner", null, null, null, "a note");
+		t.update(c);
+		assertEquals(t.getState(), "Working");
+		assertEquals(t.getOwner(), "owner");
+		
+		c = new Command(Command.CommandValue.CANCEL, null, null, null, Command.CancellationCode.DUPLICATE, "a note");
+		t.update(c);
+		assertEquals(t.getState(), "Canceled");
+		assertEquals(t.getCancellationCode(), "Duplicate");
+		
+		t = new Ticket(TicketType.REQUEST, "subject", "caller", 
+				Category.NETWORK, Priority.HIGH, "note");
+		c = new Command(Command.CommandValue.PROCESS, "owner", null, null, null, "a note");
+		t.update(c);
+		assertEquals(t.getState(), "Working");
+		assertEquals(t.getOwner(), "owner");
+		
+		c = new Command(Command.CommandValue.CANCEL, null, null, null, Command.CancellationCode.INAPPROPRIATE, "a note");
+		t.update(c);
+		assertEquals(t.getState(), "Canceled");
+		assertEquals(t.getCancellationCode(), "Inappropriate");
+		
+		t = new Ticket(TicketType.REQUEST, "subject", "caller", 
+				Category.NETWORK, Priority.HIGH, "note");
+		c = new Command(Command.CommandValue.PROCESS, "owner", null, null, null, "a note");
+		t.update(c);
+		
+		c = new Command(Command.CommandValue.RESOLVE, null, null, Command.ResolutionCode.SOLVED, null, "a note");
+		t.update(c);
+		assertEquals(t.getState(), "Resolved");
+		assertEquals(t.getOwner(), "owner");
+		assertEquals(t.getResolutionCode(), "Solved");
+		
+		c = new Command(Command.CommandValue.FEEDBACK, null, Command.FeedbackCode.AWAITING_CALLER, null, null, "a note");
+		t.update(c);
+		assertEquals(t.getState(), "Feedback");
+		assertEquals(t.getOwner(), "owner");
+		assertEquals(t.getFeedbackCode(), "Awaiting Caller");
+		
+		c = new Command(Command.CommandValue.REOPEN, null, null, null, null, "a note");
+		t.update(c);
+		assertEquals(t.getState(), "Working");
+		assertEquals(t.getOwner(), "owner");
+		
+		c = new Command(Command.CommandValue.FEEDBACK, null, Command.FeedbackCode.AWAITING_CHANGE, null, null, "a note");
+		t.update(c);
+		assertEquals(t.getState(), "Feedback");
+		assertEquals(t.getOwner(), "owner");
+		assertEquals(t.getFeedbackCode(), "Awaiting Change");
+		
+		c = new Command(Command.CommandValue.RESOLVE, null, null, Command.ResolutionCode.SOLVED, null, "a note");
+		t.update(c);
+		assertEquals(t.getState(), "Resolved");
+		assertEquals(t.getOwner(), "owner");
+		assertEquals(t.getResolutionCode(), "Solved");
+		
+		c = new Command(Command.CommandValue.FEEDBACK, null, Command.FeedbackCode.AWAITING_CALLER, null, null, "a note");
+		t.update(c);
+		assertEquals(t.getState(), "Feedback");
+		assertEquals(t.getOwner(), "owner");
+		assertEquals(t.getFeedbackCode(), "Awaiting Caller");
+		
+		c = new Command(Command.CommandValue.CANCEL, null, null, null, Command.CancellationCode.DUPLICATE, "a note");
+		t.update(c);
+		assertEquals(t.getState(), "Canceled");
+		assertEquals(t.getOwner(), "owner");
+		
+		try {
+			c = new Command(Command.CommandValue.REOPEN, null, null, null, null, "a note");
+			t.update(c);
+			fail();
+		} catch (UnsupportedOperationException e) {
+			assertEquals(t.getState(), "Canceled");
+		}
+		
+		t = new Ticket(TicketType.REQUEST, "subject", "caller", 
+				Category.NETWORK, Priority.HIGH, "note");
+		c = new Command(Command.CommandValue.PROCESS, "owner", null, null, null, "a note");
+		t.update(c);
+		
+		c = new Command(Command.CommandValue.RESOLVE, null, null, Command.ResolutionCode.NOT_COMPLETED, null, "a note");
+		t.update(c);
+		assertEquals(t.getState(), "Resolved");
+		assertEquals(t.getOwner(), "owner");
+		assertEquals(t.getResolutionCode(), "Not Completed");
+		
+		c = new Command(Command.CommandValue.REOPEN, null, null, null, null, "a note");
+		t.update(c);
+		assertEquals(t.getState(), "Working");
+		assertEquals(t.getOwner(), "owner");
+	}
+
 
 }

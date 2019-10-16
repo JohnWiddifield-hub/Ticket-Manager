@@ -474,19 +474,7 @@ public class Ticket {
 	 * @return		Ticket's state as a String
 	 */
 	public String getState() {
-		if(state instanceof NewState) {
-			return "New";
-		} else if(state instanceof WorkingState) {
-			return "Working";
-		} else if(state instanceof CanceledState) {
-			return "Canceled";
-		} else if(state instanceof ResolvedState) {
-				return "Resolved";
-		} else if(state instanceof ClosedState) {
-			return "Closed";
-		} else {
-			return "Feedback";
-		}
+		return this.state.getStateName();
 	}
 	
 	/**
@@ -677,21 +665,21 @@ public class Ticket {
 	 */
 	public String toString() {
 		
-		String output = "*" + ticketId + "#" + state.getStateName() + "#" + subject + "#" + caller + "#" + getCategory()
+		String output = "*" + ticketId + "#" + state.getStateName() + "#"  + this.getTicketTypeString() + "#"+ subject + "#" + caller + "#" + getCategory()
 		 + "#" + getPriority() + "#" + getOwner() + "#";
 
 		if (state instanceof CanceledState) {
-			output.concat(this.getCancellationCode());
+			output = output + this.getCancellationCode();
 		} else if(state instanceof ClosedState) {
-			output.concat(this.getResolutionCode());
+			output = output + this.getResolutionCode();
 		} else if(state instanceof FeedbackState) {
-			output.concat(this.getFeedbackCode());
+			output = output + this.getFeedbackCode();
 		} else if(state instanceof ResolvedState) {
-			output.concat(this.getResolutionCode());
+			output = output + this.getResolutionCode();
 		} 
 		
-		output.concat("\n");
-		output.concat(this.getNotes());
+		output = output + "\n";
+		output = output + this.getNotes();
 		
 		return output;
 		
@@ -803,6 +791,7 @@ public class Ticket {
 		public void updateState(Command command) {
 			if(command.getCommand() == Command.CommandValue.PROCESS) {
 				state = workingState;
+				owner = command.getOwnerId();
 				notes.add(command.getNote());
 			} else if(command.getCommand() == Command.CommandValue.CANCEL) {
 				state = canceledState;
@@ -914,6 +903,7 @@ public class Ticket {
 				notes.add(command.getNote());
 			} else if(command.getCommand() == Command.CommandValue.RESOLVE) {
 				state = resolvedState;
+				resolutionCode = ResolutionCode.SOLVED;
 				notes.add(command.getNote());
 			} else if(command.getCommand() == Command.CommandValue.CANCEL) {
 				state = canceledState;
