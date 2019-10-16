@@ -576,14 +576,6 @@ public class TicketTest {
 	}
 
 	/**
-	 * Tests the getNotes method for correct implemintation
-	 */
-	@Test
-	public void testGetNotes() {
-		assertTrue(true);
-	}
-
-	/**
 	 * Tests the getPriority method for correct implemintation
 	 */
 	@Test
