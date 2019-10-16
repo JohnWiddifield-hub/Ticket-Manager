@@ -322,10 +322,12 @@ public class Ticket {
 			this.setPriority(P_URGENT);
 		}
 		
-		if(note.equals("") || note.isEmpty()) {
+		if(note == null) {
+			throw new IllegalArgumentException();
+		} else if(note.isEmpty()){
 			throw new IllegalArgumentException();
 		} else {
-		this.notes.add(note);
+			this.notes.add(note);
 		}
 		
 		this.state = newState;
