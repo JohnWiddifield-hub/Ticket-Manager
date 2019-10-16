@@ -414,7 +414,7 @@ public class Ticket {
 		String output = "";
 		if(size == 1) {
 			output = output.concat("-");
-		//	output = output.concat(notes.get(0));
+			output = output.concat(notes.get(0));
 			output = output.concat("\n");
 			return output;
 		} else {
