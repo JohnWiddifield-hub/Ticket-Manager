@@ -913,6 +913,13 @@ public class Ticket {
 					} else if(command.getResolutionCode() == ResolutionCode.SOLVED) {
 						throw new UnsupportedOperationException();
 					}
+				} else if(getTicketType() == TicketType.REQUEST) {
+					if(command.getResolutionCode() == ResolutionCode.NOT_SOLVED) {
+						throw new UnsupportedOperationException();
+					} else if(command.getResolutionCode() == ResolutionCode.SOLVED) {
+						throw new UnsupportedOperationException();
+					} else if(command.getResolutionCode() == ResolutionCode.WORKAROUND) {
+						throw new UnsupportedOperationException();
 				}
 				state = resolvedState;
 				feedbackCode = null;
