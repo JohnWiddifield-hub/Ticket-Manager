@@ -26,12 +26,16 @@ public class TicketTest {
 	public void testTicketIntStringStringStringStringStringStringStringStringArrayListOfString() {
 		ArrayList<String> note = new ArrayList<String>();
 		String notesStr = "";
-		note.add("-Me have bad computer\n");
-		note.add("-Me want bigger computer\n");
-		note.add("-Me need u get me this computer\n");
+		note.add("-Me have bad computer");
+		note.add("-Me want bigger computer");
+		note.add("-Me need u get me this computer");
 		notesStr.concat(note.get(0));
 		notesStr.concat(note.get(1));
 		notesStr.concat(note.get(2));
+		
+		ArrayList<String> note2 = new ArrayList<String>();
+		String notr = "-a note";
+		note2.add(notr);
 		
 		Ticket t = new Ticket(1, "New", "Request", "Me want new computer", "jfwiddif", "Hardware", 
 				"High", "bbaggins", null, note);
@@ -498,6 +502,21 @@ public class TicketTest {
 		} catch (IllegalArgumentException e) {
 			assertEquals(t.getTicketId(), 22);
 		}
+		
+		t = new Ticket(22, "Closed", "Incident", "Me want new computer", "jfwiddif", "Network", 
+				"Low", "bbaggins", "Completed", note2);
+			
+		assertEquals(t.getCaller(), "jfwiddif");
+		assertEquals(t.getState(), "Closed");
+		assertEquals(t.getNotes(), notr);
+		assertEquals(t.getTicketTypeString(), "Incident");
+		assertEquals(t.getSubject(), "Me want new computer");
+		assertEquals(t.getPriority(), "Low");
+		assertEquals(t.getTicketId(), 22);
+		assertEquals(t.getCategory(), "Network");
+		assertEquals(t.getOwner(), "bbaggins");
+		assertEquals(t.getResolutionCode(), "Completed");
+		assertEquals(t.getNotes(), note2.get(0));
 	}
 	
 	

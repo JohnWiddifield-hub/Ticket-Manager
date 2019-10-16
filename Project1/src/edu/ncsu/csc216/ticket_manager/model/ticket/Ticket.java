@@ -266,7 +266,7 @@ public class Ticket {
 		this.setSubject(subject);
 		this.setCaller(caller);
 		this.setOwner(owner);
-		
+	
 		for (int i = 0; i < notes.size(); i++) {
 			this.notes.add(notes.get(i));
 		}
@@ -410,11 +410,18 @@ public class Ticket {
 	 * @return		String representation of the Ticket's notes
 	 */
 	public String getNotes() {
+		int size = notes.size();
 		String output = "";
-		for(int i = 0; i < notes.size(); i++) {
-			output.concat("-");
-			output.concat(notes.get(i));
+		output.concat("\n");
+		if(size == 1) {
+			output = notes.get(0);
 			output.concat("\n");
+			return output;
+		} else {
+			for(int i = 1; i < notes.size(); i++) {
+				output.concat(notes.get(i));
+				output.concat("\n");
+			}
 		}
 		return output;
 	}
