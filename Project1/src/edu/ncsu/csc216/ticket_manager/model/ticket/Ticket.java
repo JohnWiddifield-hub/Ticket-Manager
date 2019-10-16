@@ -904,7 +904,7 @@ public class Ticket {
 				state = workingState;
 				notes.add(command.getNote());
 			} else if(command.getCommand() == Command.CommandValue.RESOLVE) {
-				if(command.getResolutionCode() == ResolutionCode.COMPLETED) {
+				if(command.getResolutionCode() == ResolutionCode.COMPLETED && getTicketType() == TicketType.INCIDENT) {
 					throw new UnsupportedOperationException();
 				}
 				state = resolvedState;
