@@ -515,42 +515,10 @@ public class TicketTest {
 	}
 
 	/**
-	 * Tests the setCounter method for correct implemintation
-	 */
-	@Test
-	public void testSetCounter() {
-		fail("Not yet implemented");
-	}
-
-	/**
-	 * Tests the getCaller method for correct implemintation
-	 */
-	@Test
-	public void testGetCaller() {
-		fail("Not yet implemented");
-	}
-
-	/**
 	 * Tests the getCancellationCode method for correct implemintation
 	 */
 	@Test
 	public void testGetCancellationCode() {
-		fail("Not yet implemented");
-	}
-
-	/**
-	 * Tests the getCategory method for correct implemintation
-	 */
-	@Test
-	public void testGetCategory() {
-		fail("Not yet implemented");
-	}
-
-	/**
-	 * Tests the getFeedbackCode method for correct implemintation
-	 */
-	@Test
-	public void testGetFeedbackCode() {
 		fail("Not yet implemented");
 	}
 
