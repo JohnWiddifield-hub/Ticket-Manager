@@ -722,7 +722,7 @@ public class TicketTest {
 		t.update(c);
 		assertEquals(t.getState(), "Resolved");
 		assertEquals(t.getOwner(), "owner");
-		assertEquals(t.getResolutionCode(), "Caller Closed");
+		assertEquals(t.getResolutionCode(), "Solved");
 		
 		c = new Command(Command.CommandValue.FEEDBACK, null, Command.FeedbackCode.AWAITING_CALLER, null, null, "a note");
 		t.update(c);

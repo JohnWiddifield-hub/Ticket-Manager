@@ -904,12 +904,16 @@ public class Ticket {
 				state = workingState;
 				notes.add(command.getNote());
 			} else if(command.getCommand() == Command.CommandValue.RESOLVE) {
+				if(command.getResolutionCode() == ResolutionCode.COMPLETED) {
+					throw new UnsupportedOperationException();
+				}
 				state = resolvedState;
 				feedbackCode = null;
 				resolutionCode = command.getResolutionCode();
 				notes.add(command.getNote());
 			} else if(command.getCommand() == Command.CommandValue.CANCEL) {
 				state = canceledState;
+				feedbackCode = null;
 				notes.add(command.getNote());
 			} else throw new UnsupportedOperationException();
 		}
