@@ -561,14 +561,6 @@ public class TicketTest {
 	}
 
 	/**
-	 * Tests the getOwner method for correct implemintation
-	 */
-	@Test
-	public void testGetOwner() {
-		fail("Not yet implemented");
-	}
-
-	/**
 	 * Tests the getPriority method for correct implemintation
 	 */
 	@Test
