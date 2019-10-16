@@ -628,7 +628,7 @@ public class TicketTest {
 		assertEquals(t.getFeedbackCode(), "Awaiting Caller");
 		
 		
-		t = new Ticket(TicketType.INCIDENT, "subject", "caller", 
+		t = new Ticket(TicketType.REQUEST, "subject", "caller", 
 				Category.NETWORK, Priority.HIGH, "note");
 		c = new Command(Command.CommandValue.PROCESS, "ownerId2", null, null, null, "a note");
 		t.update(c);
