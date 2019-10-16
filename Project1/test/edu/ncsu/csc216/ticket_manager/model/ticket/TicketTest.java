@@ -39,7 +39,7 @@ public class TicketTest {
 		assertEquals(t.getTicketTypeString(), "Request");
 		assertEquals(t.getSubject(), "Me want new computer");
 		assertEquals(t.getPriority(), "High");
-		assertEquals(t.getTicketId(), "1");
+		assertEquals(t.getTicketId(), 1);
 		assertEquals(t.getCategory(), "Hardware");
 		
 		t = new Ticket(2, "New", "Incident", "Me want new computer", "jfwiddif", "Software", 
@@ -52,7 +52,7 @@ public class TicketTest {
 		assertEquals(t.getTicketTypeString(), "Incident");
 		assertEquals(t.getSubject(), "Me want new computer");
 		assertEquals(t.getPriority(), "Medium");
-		assertEquals(t.getTicketId(), "2");
+		assertEquals(t.getTicketId(), 2);
 		assertEquals(t.getCategory(), "Software");
 		
 		
@@ -65,7 +65,7 @@ public class TicketTest {
 		assertEquals(t.getTicketTypeString(), "Incident");
 		assertEquals(t.getSubject(), "Me want new computer");
 		assertEquals(t.getPriority(), "Low");
-		assertEquals(t.getTicketId(), "3");
+		assertEquals(t.getTicketId(), 3);
 		assertEquals(t.getCategory(), "Database");
 		
 		t = new Ticket(4, "New", "Request", "Me want new computer", "jfwiddif", "Inquiry", 
@@ -77,7 +77,7 @@ public class TicketTest {
 		assertEquals(t.getTicketTypeString(), "Request");
 		assertEquals(t.getSubject(), "Me want new computer");
 		assertEquals(t.getPriority(), "Urgent");
-		assertEquals(t.getTicketId(), "4");
+		assertEquals(t.getTicketId(), 4);
 		assertEquals(t.getCategory(), "Inquiry");
 		
 		
@@ -90,7 +90,7 @@ public class TicketTest {
 		assertEquals(t.getTicketTypeString(), "Incident");
 		assertEquals(t.getSubject(), "Me want new computer");
 		assertEquals(t.getPriority(), "Low");
-		assertEquals(t.getTicketId(), "4");
+		assertEquals(t.getTicketId(), 4);
 		assertEquals(t.getCategory(), "Network");
 		
 		t = new Ticket(5, "Working", "Incident", "Me want new computer", "jfwiddif", "Network", 
@@ -102,7 +102,7 @@ public class TicketTest {
 		assertEquals(t.getTicketTypeString(), "Incident");
 		assertEquals(t.getSubject(), "Me want new computer");
 		assertEquals(t.getPriority(), "Low");
-		assertEquals(t.getTicketId(), "5");
+		assertEquals(t.getTicketId(), 5);
 		assertEquals(t.getCategory(), "Network");
 		
 		try {
@@ -110,7 +110,7 @@ public class TicketTest {
 					"Low", "", "", note);
 			fail();
 		} catch (IllegalArgumentException e) {
-			assertEquals(t.getTicketId(), "5");
+			assertEquals(t.getTicketId(), 5);
 		}
 		
 		try {
@@ -118,7 +118,7 @@ public class TicketTest {
 					"Low", "bbaggins", "", note);
 			fail();
 		} catch (IllegalArgumentException e) {
-			assertEquals(t.getTicketId(), "5");
+			assertEquals(t.getTicketId(), 5);
 		}
 		
 		try {
@@ -126,7 +126,7 @@ public class TicketTest {
 					"Low", "bbaggins", "", note);
 			fail();
 		} catch (IllegalArgumentException e) {
-			assertEquals(t.getTicketId(), "5");
+			assertEquals(t.getTicketId(), 5);
 		}
 		
 		try {
@@ -134,7 +134,7 @@ public class TicketTest {
 					"Boopbeep", "bbaggins", "", note);
 			fail();
 		} catch (IllegalArgumentException e) {
-			assertEquals(t.getTicketId(), "5");
+			assertEquals(t.getTicketId(), 5);
 		}
 		
 		try {
@@ -142,7 +142,7 @@ public class TicketTest {
 					"Low", "bbaggins", "beepboop", note);
 			fail();
 		} catch (IllegalArgumentException e) {
-			assertEquals(t.getTicketId(), "5");
+			assertEquals(t.getTicketId(), 5);
 		}
 		
 		try {
@@ -150,7 +150,7 @@ public class TicketTest {
 					"Low", "bbaggins", "", note);
 			fail();
 		} catch (IllegalArgumentException e) {
-			assertEquals(t.getTicketId(), "5");
+			assertEquals(t.getTicketId(), 5);
 		}
 		
 		try {
@@ -158,7 +158,7 @@ public class TicketTest {
 					"Low", "bbaggins", "", note);
 			fail();
 		} catch (IllegalArgumentException e) {
-			assertEquals(t.getTicketId(), "5");
+			assertEquals(t.getTicketId(), 5);
 		}
 		
 		try {
@@ -166,7 +166,7 @@ public class TicketTest {
 					"Low", "bbaggins", "Awaiting Caller", note);
 			fail();
 		} catch (IllegalArgumentException e) {
-			assertEquals(t.getTicketId(), "5");
+			assertEquals(t.getTicketId(), 5);
 		}
 		
 		try {
@@ -174,7 +174,7 @@ public class TicketTest {
 					"Low", "bbaggins", "Completed", note);
 			fail();
 		} catch (IllegalArgumentException e) {
-			assertEquals(t.getTicketId(), "5");
+			assertEquals(t.getTicketId(), 5);
 		}
 		
 		try {
@@ -182,7 +182,7 @@ public class TicketTest {
 					"Low", "bbaggins", "Completed", note);
 			fail();
 		} catch (IllegalArgumentException e) {
-			assertEquals(t.getTicketId(), "5");
+			assertEquals(t.getTicketId(), 5);
 		}
 		
 		t = new Ticket(6, "Canceled", "Incident", "Me want new computer", "jfwiddif", "Network", 
@@ -194,7 +194,7 @@ public class TicketTest {
 		assertEquals(t.getTicketTypeString(), "Incident");
 		assertEquals(t.getSubject(), "Me want new computer");
 		assertEquals(t.getPriority(), "Low");
-		assertEquals(t.getTicketId(), "6");
+		assertEquals(t.getTicketId(), 6);
 		assertEquals(t.getCategory(), "Network");
 		assertEquals(t.getOwner(), "bbaggins");
 		assertEquals(t.getCancellationCode(), "Duplicate");
@@ -209,7 +209,7 @@ public class TicketTest {
 		assertEquals(t.getTicketTypeString(), "Incident");
 		assertEquals(t.getSubject(), "Me want new computer");
 		assertEquals(t.getPriority(), "Low");
-		assertEquals(t.getTicketId(), "7");
+		assertEquals(t.getTicketId(), 7);
 		assertEquals(t.getCategory(), "Network");
 		assertEquals(t.getOwner(), "bbaggins");
 		
@@ -218,7 +218,7 @@ public class TicketTest {
 					"Low", "bbaggins", "Awaiting Caller", note);
 			fail();
 		} catch (IllegalArgumentException e) {
-			assertEquals(t.getTicketId(), "7");
+			assertEquals(t.getTicketId(), 7);
 		}
 		
 		try {
@@ -226,7 +226,7 @@ public class TicketTest {
 					"Low", "bbaggins", "Inappropriate", note);
 			fail();
 		} catch (IllegalArgumentException e) {
-			assertEquals(t.getTicketId(), "7");
+			assertEquals(t.getTicketId(), 7);
 		}
 		
 		try {
@@ -234,7 +234,7 @@ public class TicketTest {
 					"beeboop", "bbaggins", "Inappropriate", note);
 			fail();
 		} catch (IllegalArgumentException e) {
-			assertEquals(t.getTicketId(), "7");
+			assertEquals(t.getTicketId(), 7);
 		}
 		
 		t = new Ticket(8, "Feedback", "Incident", "Me want new computer", "jfwiddif", "Network", 
@@ -246,7 +246,7 @@ public class TicketTest {
 		assertEquals(t.getTicketTypeString(), "Incident");
 		assertEquals(t.getSubject(), "Me want new computer");
 		assertEquals(t.getPriority(), "Low");
-		assertEquals(t.getTicketId(), "8");
+		assertEquals(t.getTicketId(), 8);
 		assertEquals(t.getCategory(), "Network");
 		assertEquals(t.getOwner(), "bbaggins");
 		assertEquals(t.getFeedbackCode(), "Awaiting Provider");
@@ -256,7 +256,7 @@ public class TicketTest {
 					"Low", "", "Awaiting Provider", note);
 			fail();
 		} catch (IllegalArgumentException e) {
-			assertEquals(t.getTicketId(), "8");
+			assertEquals(t.getTicketId(), 8);
 		}
 		
 		t = new Ticket(9, "Feedback", "Incident", "Me want new computer", "jfwiddif", "Network", 
@@ -268,7 +268,7 @@ public class TicketTest {
 		assertEquals(t.getTicketTypeString(), "Incident");
 		assertEquals(t.getSubject(), "Me want new computer");
 		assertEquals(t.getPriority(), "Low");
-		assertEquals(t.getTicketId(), "9");
+		assertEquals(t.getTicketId(), 9);
 		assertEquals(t.getCategory(), "Network");
 		assertEquals(t.getOwner(), "bbaggins");
 		assertEquals(t.getFeedbackCode(), "Awaiting Caller");
@@ -282,7 +282,7 @@ public class TicketTest {
 		assertEquals(t.getTicketTypeString(), "Incident");
 		assertEquals(t.getSubject(), "Me want new computer");
 		assertEquals(t.getPriority(), "Low");
-		assertEquals(t.getTicketId(), "10");
+		assertEquals(t.getTicketId(), 10);
 		assertEquals(t.getCategory(), "Network");
 		assertEquals(t.getOwner(), "bbaggins");
 		assertEquals(t.getFeedbackCode(), "Awaiting Change");
@@ -292,7 +292,7 @@ public class TicketTest {
 					"Low", "bbaggins", "berpderp", note);
 			fail();
 		} catch (IllegalArgumentException e) {
-			assertEquals(t.getTicketId(), "10");
+			assertEquals(t.getTicketId(), 10);
 		}
 		
 		try {
@@ -300,7 +300,7 @@ public class TicketTest {
 					"Low", "", "Workaround", note);
 			fail();
 		} catch (IllegalArgumentException e) {
-			assertEquals(t.getTicketId(), "10");
+			assertEquals(t.getTicketId(), 10);
 		}
 		
 		try {
@@ -308,7 +308,7 @@ public class TicketTest {
 					"Low", "", "Not Solved", note);
 			fail();
 		} catch (IllegalArgumentException e) {
-			assertEquals(t.getTicketId(), "10");
+			assertEquals(t.getTicketId(), 10);
 		}
 		
 		t = new Ticket(11, "Resolved", "Incident", "Me want new computer", "jfwiddif", "Network", 
@@ -320,7 +320,7 @@ public class TicketTest {
 		assertEquals(t.getTicketTypeString(), "Incident");
 		assertEquals(t.getSubject(), "Me want new computer");
 		assertEquals(t.getPriority(), "Low");
-		assertEquals(t.getTicketId(), "11");
+		assertEquals(t.getTicketId(), 11);
 		assertEquals(t.getCategory(), "Network");
 		assertEquals(t.getOwner(), "bbaggins");
 		assertEquals(t.getResolutionCode(), "Not Completed");
@@ -334,7 +334,7 @@ public class TicketTest {
 		assertEquals(t.getTicketTypeString(), "Incident");
 		assertEquals(t.getSubject(), "Me want new computer");
 		assertEquals(t.getPriority(), "Low");
-		assertEquals(t.getTicketId(), "12");
+		assertEquals(t.getTicketId(), 12);
 		assertEquals(t.getCategory(), "Network");
 		assertEquals(t.getOwner(), "bbaggins");
 		assertEquals(t.getResolutionCode(), "Solved");
@@ -348,7 +348,7 @@ public class TicketTest {
 		assertEquals(t.getTicketTypeString(), "Incident");
 		assertEquals(t.getSubject(), "Me want new computer");
 		assertEquals(t.getPriority(), "Low");
-		assertEquals(t.getTicketId(), "13");
+		assertEquals(t.getTicketId(), 13);
 		assertEquals(t.getCategory(), "Network");
 		assertEquals(t.getOwner(), "bbaggins");
 		assertEquals(t.getResolutionCode(), "Not Solved");
@@ -362,7 +362,7 @@ public class TicketTest {
 		assertEquals(t.getTicketTypeString(), "Incident");
 		assertEquals(t.getSubject(), "Me want new computer");
 		assertEquals(t.getPriority(), "Low");
-		assertEquals(t.getTicketId(), "14");
+		assertEquals(t.getTicketId(), 14);
 		assertEquals(t.getCategory(), "Network");
 		assertEquals(t.getOwner(), "bbaggins");
 		assertEquals(t.getResolutionCode(), "Workaround");
@@ -376,7 +376,7 @@ public class TicketTest {
 		assertEquals(t.getTicketTypeString(), "Incident");
 		assertEquals(t.getSubject(), "Me want new computer");
 		assertEquals(t.getPriority(), "Low");
-		assertEquals(t.getTicketId(), "15");
+		assertEquals(t.getTicketId(), 15);
 		assertEquals(t.getCategory(), "Network");
 		assertEquals(t.getOwner(), "bbaggins");
 		assertEquals(t.getResolutionCode(), "Caller Closed");
@@ -390,7 +390,7 @@ public class TicketTest {
 		assertEquals(t.getTicketTypeString(), "Incident");
 		assertEquals(t.getSubject(), "Me want new computer");
 		assertEquals(t.getPriority(), "Low");
-		assertEquals(t.getTicketId(), "16");
+		assertEquals(t.getTicketId(), 16);
 		assertEquals(t.getCategory(), "Network");
 		assertEquals(t.getOwner(), "bbaggins");
 		assertEquals(t.getResolutionCode(), "Completed");
@@ -404,7 +404,7 @@ public class TicketTest {
 		assertEquals(t.getTicketTypeString(), "Incident");
 		assertEquals(t.getSubject(), "Me want new computer");
 		assertEquals(t.getPriority(), "Low");
-		assertEquals(t.getTicketId(), "17");
+		assertEquals(t.getTicketId(), 17);
 		assertEquals(t.getCategory(), "Network");
 		assertEquals(t.getOwner(), "bbaggins");
 		assertEquals(t.getResolutionCode(), "Not Completed");
@@ -418,7 +418,7 @@ public class TicketTest {
 		assertEquals(t.getTicketTypeString(), "Incident");
 		assertEquals(t.getSubject(), "Me want new computer");
 		assertEquals(t.getPriority(), "Low");
-		assertEquals(t.getTicketId(), "18");
+		assertEquals(t.getTicketId(), 18);
 		assertEquals(t.getCategory(), "Network");
 		assertEquals(t.getOwner(), "bbaggins");
 		assertEquals(t.getResolutionCode(), "Solved");
@@ -432,7 +432,7 @@ public class TicketTest {
 		assertEquals(t.getTicketTypeString(), "Incident");
 		assertEquals(t.getSubject(), "Me want new computer");
 		assertEquals(t.getPriority(), "Low");
-		assertEquals(t.getTicketId(), "19");
+		assertEquals(t.getTicketId(), 19);
 		assertEquals(t.getCategory(), "Network");
 		assertEquals(t.getOwner(), "bbaggins");
 		assertEquals(t.getResolutionCode(), "Not Solved");
@@ -446,7 +446,7 @@ public class TicketTest {
 		assertEquals(t.getTicketTypeString(), "Incident");
 		assertEquals(t.getSubject(), "Me want new computer");
 		assertEquals(t.getPriority(), "Low");
-		assertEquals(t.getTicketId(), "20");
+		assertEquals(t.getTicketId(), 20);
 		assertEquals(t.getCategory(), "Network");
 		assertEquals(t.getOwner(), "bbaggins");
 		assertEquals(t.getResolutionCode(), "Workaround");
@@ -460,7 +460,7 @@ public class TicketTest {
 		assertEquals(t.getTicketTypeString(), "Incident");
 		assertEquals(t.getSubject(), "Me want new computer");
 		assertEquals(t.getPriority(), "Low");
-		assertEquals(t.getTicketId(), "21");
+		assertEquals(t.getTicketId(), 21);
 		assertEquals(t.getCategory(), "Network");
 		assertEquals(t.getOwner(), "bbaggins");
 		assertEquals(t.getResolutionCode(), "Caller Closed");
@@ -474,7 +474,7 @@ public class TicketTest {
 		assertEquals(t.getTicketTypeString(), "Incident");
 		assertEquals(t.getSubject(), "Me want new computer");
 		assertEquals(t.getPriority(), "Low");
-		assertEquals(t.getTicketId(), "22");
+		assertEquals(t.getTicketId(), 22);
 		assertEquals(t.getCategory(), "Network");
 		assertEquals(t.getOwner(), "bbaggins");
 		assertEquals(t.getResolutionCode(), "Completed");
@@ -484,7 +484,7 @@ public class TicketTest {
 			t = new Ticket(23, "Closed", "Incident", "Me want new computer", "jfwiddif", "Network", 
 				"Low", "bbaggins", "", note);
 		} catch (IllegalArgumentException e) {
-			assertEquals(t.getTicketId(), "22");
+			assertEquals(t.getTicketId(), 22);
 		}
 		
 		try {
@@ -492,7 +492,7 @@ public class TicketTest {
 			t = new Ticket(23, "Resolved", "Incident", "Me want new computer", "jfwiddif", "Network", 
 				"Low", "bbaggins", "", note);
 		} catch (IllegalArgumentException e) {
-			assertEquals(t.getTicketId(), "22");
+			assertEquals(t.getTicketId(), 22);
 		}
 	}
 	

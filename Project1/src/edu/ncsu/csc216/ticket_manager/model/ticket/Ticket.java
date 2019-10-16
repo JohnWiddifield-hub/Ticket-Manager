@@ -479,9 +479,9 @@ public class Ticket {
 	 * This gets the Ticket's ID
 	 * @return	ID of the Ticket
 	 */
-	public String getTicketId() {
-		String str = Integer.toString(ticketId);
-		return str;
+	public int getTicketId() {
+		
+		return this.ticketId;
 	}
 	
 	/**
