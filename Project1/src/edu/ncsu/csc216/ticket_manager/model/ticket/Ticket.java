@@ -754,6 +754,23 @@ public class Ticket {
 				feedbackCode = command.getFeedbackCode();
 				notes.add(command.getNote());
 			} else if(command.getCommand() == Command.CommandValue.RESOLVE) {
+				if(getTicketType() == TicketType.INCIDENT) {
+					if(command.getResolutionCode() == ResolutionCode.COMPLETED) {
+						throw new UnsupportedOperationException();
+					} else if(command.getResolutionCode() == ResolutionCode.NOT_COMPLETED) {
+						throw new UnsupportedOperationException();
+					}
+				} else if(command.getCommand() == Command.CommandValue.RESOLVE) {
+					if(getTicketType() == TicketType.REQUEST) {
+						if(command.getResolutionCode() == ResolutionCode.SOLVED) {
+							throw new UnsupportedOperationException();
+						} else if(command.getResolutionCode() == ResolutionCode.NOT_SOLVED) {
+							throw new UnsupportedOperationException();
+						} else if(command.getResolutionCode() == ResolutionCode.WORKAROUND) {
+							throw new UnsupportedOperationException();
+						}
+					}
+				}
 				state = resolvedState;
 				resolutionCode = command.getResolutionCode();
 				notes.add(command.getNote());

@@ -690,7 +690,7 @@ public class TicketTest {
 		assertEquals(t.getState(), "Canceled");
 		assertEquals(t.getCancellationCode(), "Inappropriate");
 		
-		t = new Ticket(TicketType.REQUEST, "subject", "caller", 
+		t = new Ticket(TicketType.INCIDENT, "subject", "caller", 
 				Category.NETWORK, Priority.HIGH, "note");
 		c = new Command(Command.CommandValue.PROCESS, "owner", null, null, null, "a note");
 		t.update(c);
@@ -718,11 +718,11 @@ public class TicketTest {
 		assertEquals(t.getOwner(), "owner");
 		assertEquals(t.getFeedbackCode(), "Awaiting Change");
 		
-		c = new Command(Command.CommandValue.RESOLVE, null, null, Command.ResolutionCode.SOLVED, null, "a note");
+		c = new Command(Command.CommandValue.RESOLVE, null, null, Command.ResolutionCode.WORKAROUND, null, "a note");
 		t.update(c);
 		assertEquals(t.getState(), "Resolved");
 		assertEquals(t.getOwner(), "owner");
-		assertEquals(t.getResolutionCode(), "Solved");
+		assertEquals(t.getResolutionCode(), "Workaround");
 		
 		c = new Command(Command.CommandValue.FEEDBACK, null, Command.FeedbackCode.AWAITING_CALLER, null, null, "a note");
 		t.update(c);
