@@ -306,7 +306,7 @@ public class Ticket {
 			this.setCategory(C_NETWORK);
 		} else if(category == Category.SOFTWARE) {
 			this.setCategory(C_SOFTWARE);
-		}
+		} else throw new IllegalArgumentException();
 		
 		if(priority == Priority.HIGH) {
 			this.setPriority(P_HIGH);

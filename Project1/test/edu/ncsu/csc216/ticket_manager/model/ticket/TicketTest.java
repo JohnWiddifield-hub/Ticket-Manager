@@ -525,6 +525,13 @@ public class TicketTest {
 			assertEquals(ticket.getTicketType(), TicketType.INCIDENT);
 		}
 		
+		try {
+			new Ticket(TicketType.INCIDENT, "subject", "caller", null, 
+					Priority.URGENT, "note");
+			fail();
+		} catch (IllegalArgumentException e) {
+			assertEquals(ticket.getTicketType(), TicketType.INCIDENT);
+		}
 		
 				
 	}
