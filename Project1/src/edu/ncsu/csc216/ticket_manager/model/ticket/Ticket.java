@@ -906,7 +906,7 @@ public class Ticket {
 			} else if(command.getCommand() == Command.CommandValue.RESOLVE) {
 				state = resolvedState;
 				feedbackCode = null;
-				resolutionCode = ResolutionCode.SOLVED;
+				resolutionCode = ResolutionCode.CALLER_CLOSED;
 				notes.add(command.getNote());
 			} else if(command.getCommand() == Command.CommandValue.CANCEL) {
 				state = canceledState;
