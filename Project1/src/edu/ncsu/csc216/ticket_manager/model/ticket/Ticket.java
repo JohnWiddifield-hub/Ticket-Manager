@@ -61,7 +61,7 @@ public class Ticket {
 	/** The Owner of the Ticket */
 	private String owner;
 	/** An ArrayList of notes associated with the Ticket */
-	private ArrayList<String> notes;
+	private ArrayList<String> notes = new ArrayList<String>();
 	/** The State of the Ticket */
 	private TicketState state;
 	/** The TicketType of the Ticket */
@@ -86,17 +86,17 @@ public class Ticket {
 	public enum TicketType { REQUEST, INCIDENT }
 	
 	/** Instance of the concrete inner TicketState class NewState */
-	public final NewState newState = null;
+	public final NewState newState = new NewState();
 	/** Instance of the concrete inner TicketState class WorkingState */
-	public final WorkingState workingState = null;
+	public final WorkingState workingState = new WorkingState();
 	/** Instance of the concrete inner TicketState class FeedbackState */
-	public final FeedbackState feedbackState = null;
+	public final FeedbackState feedbackState = new FeedbackState();
 	/** Instance of the concrete inner TicketState class ResolvedState */
-	public final ResolvedState resolvedState = null;
+	public final ResolvedState resolvedState = new ResolvedState();
 	/** Instance of the concrete inner TicketState class ClosedState */
-	public final ClosedState closedState = null;
+	public final ClosedState closedState = new ClosedState();
 	/** Instance of the concrete inner TicketState class CanceledState */
-	public final CanceledState canceledState = null;
+	public final CanceledState canceledState = new CanceledState();
 	
 /*	/** This holds the Ticket type for the Ticket 
 	private TicketType tT;
@@ -169,14 +169,16 @@ public class Ticket {
 			this.setPriority(P_URGENT);
 		} else throw new IllegalArgumentException();
 		
-		if(owner.isEmpty() && state.equals("Working")) {
+		if(owner != null) {
+			if(owner.isEmpty() && state.equals("Working")) {
 			throw new IllegalArgumentException();
-		} else if(owner.isEmpty() && state.equals("Feedback")) {
+			} else if(owner.isEmpty() && state.equals("Feedback")) {
 			throw new IllegalArgumentException();
-		} else if(owner.isEmpty() && state.equals("Resolved")) {
+			} else if(owner.isEmpty() && state.equals("Resolved")) {
 			throw new IllegalArgumentException();
-		} else if(owner.isEmpty() && state.equals("Closed")) {
-			throw new IllegalArgumentException();
+			} else if(owner.isEmpty() && state.equals("Closed")) {
+				throw new IllegalArgumentException();
+			}
 		}
 		
 		if(state.equals("Feedback") && code.equals("Awaiting Provider")) {
@@ -221,17 +223,33 @@ public class Ticket {
 			throw new IllegalArgumentException();
 		}
 		
-		if(ticketType == TT_INCIDENT && code.equals("Caller Closed")) {
-			this.setResolutionCode("Caller Closed");
-		} else if(ticketType == TT_INCIDENT && code.equals("Solved")) {
-			this.setResolutionCode("Solved");
-		} else if(ticketType == TT_INCIDENT && code.equals("Workaround")) {
-			this.setResolutionCode("Workaround");
-		} else if(ticketType == TT_INCIDENT && code.equals("Not Solved")) {
-			this.setResolutionCode("Not Solved");
-		} else if(ticketType == TT_INCIDENT) {
-			throw new IllegalArgumentException();
-		}
+		if(code != null) {
+			if(ticketType.contentEquals(TT_INCIDENT) && code.contentEquals("Caller Closed")) {
+				this.setResolutionCode("Caller Closed");
+			} else if(ticketType.contentEquals(TT_INCIDENT) && code.contentEquals("Solved")) {
+				this.setResolutionCode("Solved");
+			} else if(ticketType.contentEquals(TT_INCIDENT) && code.contentEquals("Workaround")) {
+				this.setResolutionCode("Workaround");
+			} else if(ticketType.contentEquals(TT_INCIDENT) && code.contentEquals("Not Solved")) {
+				this.setResolutionCode("Not Solved");
+			} else if(ticketType.contentEquals(TT_INCIDENT) && code.contentEquals("Duplicate")) {
+				this.setCancellationCode("Duplicate");
+			} else if(ticketType.contentEquals(TT_INCIDENT) && code.contentEquals("Inappropriate")) {
+				this.setCancellationCode("Inappropriate");
+			} else if(ticketType.contentEquals(TT_INCIDENT) && code.contentEquals("Awaiting Provider")) {
+				this.setFeedbackCode("Awaiting Provider");
+			} else if(ticketType.contentEquals(TT_INCIDENT) && code.contentEquals("Awaiting Caller")) {
+				this.setFeedbackCode("Awaiting Caller");
+			} else if(ticketType.contentEquals(TT_INCIDENT) && code.contentEquals("Awaiting Change")) {
+				this.setFeedbackCode("Awaiting Change");
+			} else if(ticketType.contentEquals(TT_INCIDENT) && code.contentEquals("Completed")) {
+				this.setResolutionCode("Completed");
+			} else if(ticketType.contentEquals(TT_INCIDENT) && code.contentEquals("Not Completed")) {
+				this.setResolutionCode("Not Completed");
+			} else if(ticketType.contentEquals(TT_INCIDENT) && !code.isEmpty()) {
+				throw new IllegalArgumentException();
+			}
+		} 
 		
 		if(state.contentEquals("Canceled") && code.equals("Duplicate")) {
 			this.setCancellationCode("Duplicate");
@@ -557,7 +575,7 @@ public class Ticket {
 			this.priority = Priority.LOW;
 		} else if(priority.contentEquals("Medium")) {
 			this.priority = Priority.MEDIUM;
-		} else if(priority.contentEquals("Ugent")) {
+		} else if(priority.contentEquals("Urgent")) {
 			this.priority = Priority.URGENT;
 		} else throw new IllegalArgumentException();
 	}
