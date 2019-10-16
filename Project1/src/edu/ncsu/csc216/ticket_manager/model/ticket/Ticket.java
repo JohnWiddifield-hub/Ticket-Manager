@@ -369,7 +369,9 @@ public class Ticket {
 	public String getCancellationCode() {
 		if(cancellationCode == CancellationCode.DUPLICATE){
 			return "Duplicate";
-		} else return "Inappropriate";
+		} else if(cancellationCode == CancellationCode.INAPPROPRIATE) {
+			return "Inappropriate";
+		} else return null;
 	}
 	
 	/**
