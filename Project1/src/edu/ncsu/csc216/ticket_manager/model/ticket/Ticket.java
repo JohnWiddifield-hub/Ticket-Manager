@@ -901,11 +901,18 @@ public class Ticket {
 		 */
 		public void updateState(Command command) {
 			if(command.getCommand() == Command.CommandValue.REOPEN) {
+				feedbackCode = null;
 				state = workingState;
 				notes.add(command.getNote());
 			} else if(command.getCommand() == Command.CommandValue.RESOLVE) {
-				if(command.getResolutionCode() == ResolutionCode.COMPLETED && getTicketType() == TicketType.INCIDENT) {
-					throw new UnsupportedOperationException();
+				if(getTicketType() == TicketType.INCIDENT) {
+					if(command.getResolutionCode() == ResolutionCode.COMPLETED) {
+						throw new UnsupportedOperationException();
+					} else if(command.getResolutionCode() == ResolutionCode.NOT_COMPLETED) {
+						throw new UnsupportedOperationException();
+					} else if(command.getResolutionCode() == ResolutionCode.SOLVED) {
+						throw new UnsupportedOperationException();
+					}
 				}
 				state = resolvedState;
 				feedbackCode = null;
@@ -913,6 +920,7 @@ public class Ticket {
 				notes.add(command.getNote());
 			} else if(command.getCommand() == Command.CommandValue.CANCEL) {
 				state = canceledState;
+				cancellationCode = command.getCancellationCode();
 				feedbackCode = null;
 				notes.add(command.getNote());
 			} else throw new UnsupportedOperationException();
