@@ -920,6 +920,7 @@ public class Ticket {
 						throw new UnsupportedOperationException();
 					} else if(command.getResolutionCode() == ResolutionCode.WORKAROUND) {
 						throw new UnsupportedOperationException();
+					}
 				}
 				state = resolvedState;
 				feedbackCode = null;
