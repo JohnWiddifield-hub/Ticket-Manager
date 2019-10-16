@@ -454,9 +454,9 @@ public class Ticket {
 			return "Not Solved";
 		} else if(resolutionCode == ResolutionCode.SOLVED) {
 			return "Solved";
-		} else {
+		} else if(resolutionCode == ResolutionCode.WORKAROUND){
 			return "Workaround";
-		}
+		} else return null;
 	}
 	
 	/**
