@@ -415,13 +415,13 @@ public class Ticket {
 		if(size == 1) {
 			output = output.concat("-");
 			output = output.concat(notes.get(0));
-	//		output = output.concat("\n");
+			output = output.concat("\n");
 			return output;
 		} else {
 			for(int i = 0; i < notes.size(); i++) {
 				output = output.concat("-");
 				output = output.concat(notes.get(i));
-		//		output = output.concat("\n");
+				output = output.concat("\n");
 			}
 		}
 		return output;
