@@ -890,12 +890,5 @@ public class TicketTest {
 		} catch (UnsupportedOperationException e) {
 			assertEquals(t.getState(), "Feedback");
 		}
-		try {
-			c = new Command(Command.CommandValue.RESOLVE, null, null, Command.ResolutionCode.SOLVED, null, "a note");
-			t.update(c);
-			fail();
-		} catch (UnsupportedOperationException e) {
-			assertEquals(t.getState(), "Feedback");
-		}
 	}
 }
