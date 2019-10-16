@@ -869,6 +869,7 @@ public class Ticket {
 		public void updateState(Command command) {
 			if(command.getCommand() == Command.CommandValue.REOPEN) {
 				state = workingState;
+				cancellationCode = null;
 				notes.add(command.getNote());
 			} else throw new UnsupportedOperationException();
 		}
@@ -903,6 +904,7 @@ public class Ticket {
 				notes.add(command.getNote());
 			} else if(command.getCommand() == Command.CommandValue.RESOLVE) {
 				state = resolvedState;
+				feedbackCode = null;
 				resolutionCode = ResolutionCode.SOLVED;
 				notes.add(command.getNote());
 			} else if(command.getCommand() == Command.CommandValue.CANCEL) {
