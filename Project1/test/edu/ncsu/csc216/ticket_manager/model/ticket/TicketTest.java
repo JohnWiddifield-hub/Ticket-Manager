@@ -525,6 +525,7 @@ public class TicketTest {
 			assertEquals(ticket.getTicketType(), TicketType.INCIDENT);
 		}
 		
+		
 				
 	}
 

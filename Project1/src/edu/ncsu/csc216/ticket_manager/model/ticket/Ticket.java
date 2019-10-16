@@ -187,6 +187,8 @@ public class Ticket {
 			this.setFeedbackCode("Awaiting Caller");
 		} else if(state.equals("Feedback") && code.equals("Awaiting Change")) {
 			this.setFeedbackCode("Awaiting Change");
+		} else if(state.equals("Feedback") && code == null) {
+			this.setFeedbackCode(null);
 		} else if(state.equals("Feedback")) {
 			throw new IllegalArgumentException();
 		}
@@ -558,7 +560,9 @@ public class Ticket {
 	 * @param feedbackCode			feedbackCode to set for the Ticket
 	 */
 	private void setFeedbackCode(String feedbackCode) {
-		if(feedbackCode.contentEquals("Awaiting Caller")) {
+		if(feedbackCode == null) {
+			this.feedbackCode = null;
+		} else if(feedbackCode.contentEquals("Awaiting Caller")) {
 			this.feedbackCode = FeedbackCode.AWAITING_CALLER;
 		} else if(feedbackCode.contentEquals("Awaiting Provider")) {
 			this.feedbackCode = FeedbackCode.AWAITING_PROVIDER;
