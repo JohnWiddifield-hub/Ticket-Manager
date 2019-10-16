@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import org.junit.Test;
 
 import edu.ncsu.csc216.ticket_manager.model.command.Command;
+import edu.ncsu.csc216.ticket_manager.model.command.Command.FeedbackCode;
 import edu.ncsu.csc216.ticket_manager.model.ticket.Ticket.Category;
 import edu.ncsu.csc216.ticket_manager.model.ticket.Ticket.Priority;
 import edu.ncsu.csc216.ticket_manager.model.ticket.Ticket.TicketType;
@@ -758,7 +759,143 @@ public class TicketTest {
 		t.update(c);
 		assertEquals(t.getState(), "Working");
 		assertEquals(t.getOwner(), "owner");
+		
+		t = new Ticket(TicketType.REQUEST, "subject", "caller", 
+				Category.NETWORK, Priority.HIGH, "note");
+		c = new Command(Command.CommandValue.PROCESS, "owner", null, null, null, "a note");
+		t.update(c);
+		
+		c = new Command(Command.CommandValue.RESOLVE, null, null, Command.ResolutionCode.COMPLETED, null, "a note");
+		t.update(c);
+		assertEquals(t.getState(), "Resolved");
+		assertEquals(t.getOwner(), "owner");
+		assertEquals(t.getResolutionCode(), "Completed");
+		
+		c = new Command(Command.CommandValue.FEEDBACK, null, Command.FeedbackCode.AWAITING_CALLER, null, null, "a note");
+		t.update(c);
+		assertEquals(t.getState(), "Feedback");
+		assertEquals(t.getOwner(), "owner");
+		assertEquals(t.getFeedbackCode(), "Awaiting Caller");
+		
+		c = new Command(Command.CommandValue.REOPEN, null, null, null, null, "a note");
+		t.update(c);
+		assertEquals(t.getState(), "Working");
+		assertEquals(t.getOwner(), "owner");
+		
+		c = new Command(Command.CommandValue.FEEDBACK, null, Command.FeedbackCode.AWAITING_CHANGE, null, null, "a note");
+		t.update(c);
+		assertEquals(t.getState(), "Feedback");
+		assertEquals(t.getOwner(), "owner");
+		assertEquals(t.getFeedbackCode(), "Awaiting Change");
+		
+		try {
+			c = new Command(Command.CommandValue.RESOLVE, null, null, Command.ResolutionCode.NOT_SOLVED, null, "a note");
+			t.update(c);
+			fail();
+		} catch (UnsupportedOperationException e) {
+			assertEquals(t.getState(), "Feedback");
+		}
+		try {
+			c = new Command(Command.CommandValue.RESOLVE, null, null, Command.ResolutionCode.SOLVED, null, "a note");
+			t.update(c);
+			fail();
+		} catch (UnsupportedOperationException e) {
+			assertEquals(t.getState(), "Feedback");
+		}
+		try {
+			c = new Command(Command.CommandValue.RESOLVE, null, null, Command.ResolutionCode.WORKAROUND, null, "a note");
+			t.update(c);
+			fail();
+		} catch (UnsupportedOperationException e) {
+			assertEquals(t.getState(), "Feedback");
+		}
+		c = new Command(Command.CommandValue.RESOLVE, null, null, Command.ResolutionCode.COMPLETED, null, "a note");
+		t.update(c);
+		assertEquals(t.getState(), "Resolved");
+		assertEquals(t.getOwner(), "owner");
+		assertEquals(t.getResolutionCode(), "Completed");
+		
+		t = new Ticket(TicketType.REQUEST, "subject", "caller", 
+				Category.NETWORK, Priority.HIGH, "note");
+		c = new Command(Command.CommandValue.PROCESS, "owner", null, null, null, "a note");
+		t.update(c);
+		assertEquals(t.getState(), "Working");
+		assertEquals(t.getOwner(), "owner");
+		
+		try {
+			c = new Command(Command.CommandValue.RESOLVE, null, null, Command.ResolutionCode.SOLVED, null, "a note");
+			t.update(c);
+			fail();
+		} catch (UnsupportedOperationException e) {
+			assertEquals(t.getState(), "Working");
+		}
+		try {
+			c = new Command(Command.CommandValue.RESOLVE, null, null, Command.ResolutionCode.NOT_SOLVED, null, "a note");
+			t.update(c);
+			fail();
+		} catch (UnsupportedOperationException e) {
+			assertEquals(t.getState(), "Working");
+		}
+		try {
+			c = new Command(Command.CommandValue.RESOLVE, null, null, Command.ResolutionCode.WORKAROUND, null, "a note");
+			t.update(c);
+			fail();
+		} catch (UnsupportedOperationException e) {
+			assertEquals(t.getState(), "Working");
+		}
+		
+		
+		t = new Ticket(TicketType.INCIDENT, "subject", "caller", 
+				Category.NETWORK, Priority.HIGH, "note");
+		c = new Command(Command.CommandValue.PROCESS, "owner", null, null, null, "a note");
+		t.update(c);
+		assertEquals(t.getState(), "Working");
+		assertEquals(t.getOwner(), "owner");
+		
+		try {
+			c = new Command(Command.CommandValue.RESOLVE, null, null, Command.ResolutionCode.COMPLETED, null, "a note");
+			t.update(c);
+			fail();
+		} catch (UnsupportedOperationException e) {
+			assertEquals(t.getState(), "Working");
+		}
+		try {
+			c = new Command(Command.CommandValue.RESOLVE, null, null, Command.ResolutionCode.NOT_COMPLETED, null, "a note");
+			t.update(c);
+			fail();
+		} catch (UnsupportedOperationException e) {
+			assertEquals(t.getState(), "Working");
+		}
+		
+		t = new Ticket(TicketType.INCIDENT, "subject", "caller", 
+				Category.NETWORK, Priority.HIGH, "note");
+		c = new Command(Command.CommandValue.PROCESS, "owner", null, null, null, "a note");
+		t.update(c);
+		assertEquals(t.getState(), "Working");
+		assertEquals(t.getOwner(), "owner");
+		c = new Command(Command.CommandValue.FEEDBACK, null, FeedbackCode.AWAITING_CALLER, null, null, "a note");
+		t.update(c);
+		
+		try {
+			c = new Command(Command.CommandValue.RESOLVE, null, null, Command.ResolutionCode.COMPLETED, null, "a note");
+			t.update(c);
+			fail();
+		} catch (UnsupportedOperationException e) {
+			assertEquals(t.getState(), "Feedback");
+		}
+		try {
+			c = new Command(Command.CommandValue.RESOLVE, null, null, Command.ResolutionCode.NOT_COMPLETED, null, "a note");
+			t.update(c);
+			fail();
+		} catch (UnsupportedOperationException e) {
+			assertEquals(t.getState(), "Feedback");
+		}
+		try {
+			c = new Command(Command.CommandValue.RESOLVE, null, null, Command.ResolutionCode.SOLVED, null, "a note");
+			t.update(c);
+			fail();
+		} catch (UnsupportedOperationException e) {
+			assertEquals(t.getState(), "Feedback");
+		}
 	}
-
-
 }
