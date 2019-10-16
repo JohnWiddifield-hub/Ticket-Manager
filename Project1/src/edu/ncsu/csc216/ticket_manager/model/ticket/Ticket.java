@@ -391,7 +391,11 @@ public class Ticket {
 			return "Awaiting Caller";
 		} else if(feedbackCode== FeedbackCode.AWAITING_CHANGE) {
 			return "Awaiting Change";
-		} else return "Awaiting Provider";
+		} else if(feedbackCode == FeedbackCode.AWAITING_PROVIDER) {
+			return "Awaiting Provider";
+		} else if(feedbackCode == null) {
+			return null;
+		}
 	}
 	
 	/**
