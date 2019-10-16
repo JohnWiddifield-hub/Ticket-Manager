@@ -339,6 +339,9 @@ public class Ticket {
 	 * @param cntr		ID to set the Counter to
 	 */
 	public static void setCounter(int cntr) {
+		if(cntr < 1) {
+			throw new IllegalArgumentException();
+		}
 		counter = cntr;
 	}
 
