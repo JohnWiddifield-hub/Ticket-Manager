@@ -340,7 +340,7 @@ public class Ticket {
 	 */
 	public static void setCounter(int cntr) {
 		if(cntr < 1) {
-			throw new IllegalArgumentException();
+			throw new IllegalArgumentException("Ticket id must be a value greater than 0.");
 		}
 		counter = cntr;
 	}

@@ -6,6 +6,10 @@ import java.util.ArrayList;
 
 import org.junit.Test;
 
+import edu.ncsu.csc216.ticket_manager.model.ticket.Ticket.Category;
+import edu.ncsu.csc216.ticket_manager.model.ticket.Ticket.Priority;
+import edu.ncsu.csc216.ticket_manager.model.ticket.Ticket.TicketType;
+
 /**
  * This class tests the Ticket class for correct method implementation and for
  * proper functionality.
@@ -503,7 +507,25 @@ public class TicketTest {
 	 */
 	@Test
 	public void testTicketTicketTypeStringStringCategoryPriorityString() {
-		fail("Not yet implemented");
+		
+		Ticket ticket = new Ticket(TicketType.INCIDENT, "subject", "caller", 
+				Category.DATABASE, Priority.HIGH, "note");
+		
+		assertEquals(ticket.getTicketType(), TicketType.INCIDENT);
+		assertEquals(ticket.getSubject(), "subject");
+		assertEquals(ticket.getCaller(), "caller");
+		assertEquals(ticket.getCategory(), "Database");
+		assertEquals(ticket.getPriority(), "High");
+		
+		try {
+			ticket = new Ticket(null, "subject", "caller", 
+					Category.DATABASE, Priority.HIGH, "note");
+			fail();
+		} catch (IllegalArgumentException e) {
+			assertEquals(ticket.getTicketType(), TicketType.INCIDENT);
+		}
+		
+				
 	}
 
 	/**
