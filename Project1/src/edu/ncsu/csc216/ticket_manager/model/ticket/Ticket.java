@@ -286,8 +286,9 @@ public class Ticket {
 	public Ticket(TicketType ticketType, String subject, String caller, Category category, Priority priority, String note) {
 		this.setCaller(caller);
 		this.setSubject(subject);
-		
-		if(ticketType == TicketType.INCIDENT) {
+		if(ticketType == null) {
+			throw new IllegalArgumentException();
+		} else if(ticketType == TicketType.INCIDENT) {
 			this.setTicketType(TT_INCIDENT);
 		} else if(ticketType == TicketType.REQUEST) {
 			this.setTicketType(TT_REQUEST);
