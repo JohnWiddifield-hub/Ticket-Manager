@@ -29,12 +29,16 @@ public class TicketTest {
 		note.add("-Me have bad computer");
 		note.add("-Me want bigger computer");
 		note.add("-Me need u get me this computer");
-		notesStr.concat(note.get(0));
-		notesStr.concat(note.get(1));
-		notesStr.concat(note.get(2));
+		notesStr = notesStr.concat(note.get(0));
+		//notesStr = notesStr.concat("\n");
+		notesStr = notesStr.concat(note.get(1));
+		//notesStr = notesStr.concat("\n");
+		notesStr = notesStr.concat(note.get(2));
+		//notesStr = notesStr.concat("\n");
 		
 		ArrayList<String> note2 = new ArrayList<String>();
 		String notr = "-a note";
+		notr = notr.concat("\n");
 		note2.add(notr);
 		
 		Ticket t = new Ticket(1, "New", "Request", "Me want new computer", "jfwiddif", "Hardware", 

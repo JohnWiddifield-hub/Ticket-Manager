@@ -412,15 +412,14 @@ public class Ticket {
 	public String getNotes() {
 		int size = notes.size();
 		String output = "";
-		output.concat("\n");
 		if(size == 1) {
 			output = notes.get(0);
-			output.concat("\n");
+	//		output = output.concat("\n");
 			return output;
 		} else {
-			for(int i = 1; i < notes.size(); i++) {
-				output.concat(notes.get(i));
-				output.concat("\n");
+			for(int i = 0; i < notes.size(); i++) {
+				output = output.concat(notes.get(i));
+		//		output = output.concat("\n");
 			}
 		}
 		return output;
