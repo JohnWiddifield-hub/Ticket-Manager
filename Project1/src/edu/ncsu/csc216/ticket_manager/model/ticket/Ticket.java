@@ -869,6 +869,7 @@ public class Ticket {
 		public void updateState(Command command) {
 			if(command.getCommand() == Command.CommandValue.REOPEN) {
 				state = workingState;
+				resolutionCode = null;
 				cancellationCode = null;
 				notes.add(command.getNote());
 			} else throw new UnsupportedOperationException();
