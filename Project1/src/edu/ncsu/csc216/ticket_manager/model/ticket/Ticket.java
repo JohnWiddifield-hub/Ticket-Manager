@@ -159,7 +159,9 @@ public class Ticket {
 			this.setCategory(C_NETWORK);
 		} else throw new IllegalArgumentException();
 		
-		if(priority == P_HIGH) {
+		if(priority == null) {
+			throw new IllegalArgumentException();
+		} else if(priority == P_HIGH) {
 			this.setPriority(P_HIGH);
 		} else if(priority == P_MEDIUM) {
 			this.setPriority(P_MEDIUM);
@@ -308,7 +310,9 @@ public class Ticket {
 			this.setCategory(C_SOFTWARE);
 		} else throw new IllegalArgumentException();
 		
-		if(priority == Priority.HIGH) {
+		if(priority == null) {
+			throw new IllegalArgumentException();
+		} else if(priority == Priority.HIGH) {
 			this.setPriority(P_HIGH);
 		} else if(priority == Priority.LOW) {
 			this.setPriority(P_LOW);
@@ -393,9 +397,8 @@ public class Ticket {
 			return "Awaiting Change";
 		} else if(feedbackCode == FeedbackCode.AWAITING_PROVIDER) {
 			return "Awaiting Provider";
-		} else if(feedbackCode == null) {
-			return null;
-		}
+		} else return null;
+		
 	}
 	
 	/**
