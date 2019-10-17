@@ -22,18 +22,20 @@ public class TicketReaderTest {
 	 * @throws FileNotFoundException if the file cannot be found
 	 */
 	@Test
-	public void testReadTicketFile() throws FileNotFoundException {
+	public void testReadTicketFile() {
 		/** Valid ticket records */
-		String validTestFile = "test-files/ticket1.txt";
+		String validTestFile = "test-files/ticket2.txt";
 		ArrayList<Ticket> tickets = TicketReader.readTicketFile(validTestFile);
+		//3#Closed#Request#Subject line#caller#Inquiry#Medium#owner#Not Completed
 		Ticket t1 = tickets.get(0);
-		assertEquals(t1.getTicketId(), 1);
-		assertEquals(t1.getState(), "New");
-		assertEquals(t1.getTicketTypeString(), "Incident");
-		assertEquals(t1.getSubject(), "Github down");
-		assertEquals(t1.getCaller(), "sesmith5");
-		assertEquals(t1.getCategory(), "Software");
-		assertEquals(t1.getPriority(), "Urgent");
+		assertEquals(t1.getTicketId(), 3);
+		assertEquals(t1.getState(), "Closed");
+		assertEquals(t1.getTicketTypeString(), "Request");
+		assertEquals(t1.getSubject(), "Subject line");
+		assertEquals(t1.getCaller(), "caller");
+		assertEquals(t1.getCategory(), "Inquiry");
+		assertEquals(t1.getPriority(), "Medium");
+		assertEquals(t1.getResolutionCode(), "Not Completed");
 		assertEquals(t1.getNotes(), "-GitHub is not responding when I navigate to github.ncsu.edu");
 	}
 

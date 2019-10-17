@@ -42,11 +42,16 @@ public class TicketReader {
     	code = "";
     	
     	ArrayList<String> notes = new ArrayList<String>();
+    	String note = "";
 	    Scanner fileReader = new Scanner(new FileInputStream(fileName));
 
 	    while(fileReader.hasNextLine()) {
 	    	String line = fileReader.nextLine();
 	    	if(line.startsWith("*")) {
+	    		if(!note.isEmpty()) {
+	    			notes.add(note);
+	    			note = "";
+	    		}
 	    		if(ticketId != null) {
 	    			tickets.add(new Ticket(Integer.parseInt(ticketId), state, ticketType, subject, caller, category, priority,
 	    					 owner, code, notes));
@@ -69,8 +74,12 @@ public class TicketReader {
 	    		lineReader.close();
 	    		
 	    	} else if(line.startsWith("-")) {
+
 	    		line = line.replace("-", "");
-	    		notes.add(line);
+	    		note = note + line;
+	    	} else if(!line.startsWith("-") && !line.startsWith("*")) {
+	    		
+	    		note = note + line;
 	    	}
 	    }
 	    tickets.add(new Ticket(Integer.parseInt(ticketId), state, ticketType, subject, caller, category, priority,
