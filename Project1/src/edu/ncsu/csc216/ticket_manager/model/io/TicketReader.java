@@ -27,7 +27,7 @@ public class TicketReader {
 	 * @throws IllegalArgumentException if there are problems processing the file.
 	 * 		   Message will be "Unable to load file."
 	 */
-	public static ArrayList<Ticket> readTicketFile(String fileName) {
+	public static ArrayList<Ticket> readTicketFile(String fileName) throws FileNotFoundException{
 		/*
     	String ticketId, state, ticketType, subject, caller, category, priority, owner, 
     	code;
