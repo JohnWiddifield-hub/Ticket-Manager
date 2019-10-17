@@ -412,16 +412,17 @@ public class Ticket {
 	public String getNotes() {
 		int size = notes.size();
 		String output = "";
+		
 		if(size == 1) {
+			output = output.concat("\n");
 			output = output.concat("-");
 			output = output.concat(notes.get(0));
-			output = output.concat("\n");
 			return output;
 		} else {
 			for(int i = 0; i < notes.size(); i++) {
+				output = output.concat("\n");
 				output = output.concat("-");
 				output = output.concat(notes.get(i));
-				output = output.concat("\n");
 			}
 		}
 		return output;
@@ -678,7 +679,6 @@ public class Ticket {
 			output = output + this.getResolutionCode();
 		} 
 		
-		output = output + "\n";
 		output = output + this.getNotes();
 		
 		return output;
@@ -927,8 +927,6 @@ public class Ticket {
 						throw new UnsupportedOperationException();
 					} else if(command.getResolutionCode() == ResolutionCode.NOT_COMPLETED) {
 						throw new UnsupportedOperationException();
-				//	} else if(command.getResolutionCode() == ResolutionCode.SOLVED) {
-				//		throw new UnsupportedOperationException();
 					}
 				} else if(getTicketType() == TicketType.REQUEST) {
 					if(command.getResolutionCode() == ResolutionCode.NOT_SOLVED) {
