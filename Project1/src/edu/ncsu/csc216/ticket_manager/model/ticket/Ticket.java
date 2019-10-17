@@ -420,9 +420,14 @@ public class Ticket {
 			return output;
 		} else {
 			for(int i = 0; i < notes.size(); i++) {
-				output = output.concat("-");
-				output = output.concat(notes.get(i));
-				output = output.concat("\n");
+				if(i != notes.size() - 1) {
+					output = output.concat("-");
+					output = output.concat(notes.get(i));
+					output = output.concat("\n");
+				} else {
+					output = output.concat("-");
+					output = output.concat(notes.get(i));
+				}
 			}
 		}
 		return output;

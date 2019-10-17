@@ -575,7 +575,7 @@ public class TicketTest {
 				"High", "bbaggins", null, note);
 		
 		String truString = "*1#New#Request#Me want new computer#jfwiddif#Hardware#High#bbaggins#"
-				+ "\n-Me have bad computer\n-Me want bigger computer\n-Me need u get me this computer\n";
+				+ "\n-Me have bad computer\n-Me want bigger computer\n-Me need u get me this computer";
 		assertEquals(t.toString(), truString);
 
 	}
@@ -593,7 +593,7 @@ public class TicketTest {
 		Ticket t = new Ticket(1, "New", "Request", "Me want new computer", "jfwiddif", "Hardware", 
 				"High", "bbaggins", null, note);
 		
-		assertEquals(t.getNotes(), "-Me have bad computer\n-Me want bigger computer\n-Me need u get me this computer\n");
+		assertEquals(t.getNotes(), "-Me have bad computer\n-Me want bigger computer\n-Me need u get me this computer");
 		
 		ArrayList<String> note2 = new ArrayList<String>();
 		note2.add("Me need u get me this computer");
