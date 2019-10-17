@@ -24,7 +24,7 @@ public class TicketWriter {
 	 * @throws IOException when a file cannot be created
 	 * @throws IllegalArgumentException if there are any errors with the message "Unable to save file"
 	 */
-	public static void writeTicketFile(String fileName, List<Ticket> tickets) throws IOException {
+	public static void writeTicketFile(String fileName, List<Ticket> tickets) {
 	/*	 PrintStream fileWriter = new PrintStream(new File(fileName));
 		 
 	        for (int i = 0; i < tickets.size(); i++) {
