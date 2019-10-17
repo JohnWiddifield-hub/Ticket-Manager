@@ -211,12 +211,6 @@ public class Ticket {
 			this.setResolutionCode("Not Solved");
 		} else if(state.equals("Resolved") && code.equals("Caller Closed")) {
 			this.setResolutionCode("Caller Closed");
-		} else if(state.equals("Working") && code.contentEquals("Awaiting Caller")) {
-			throw new IllegalArgumentException();
-		} else if(state.equals("Working") && code.contentEquals("Solved")) {
-			throw new IllegalArgumentException();
-		} else if(state.equals("Working") && code.contentEquals("Duplicate")) {
-			throw new IllegalArgumentException();
 		} else if(state.equals("Resolved")) {
 			throw new IllegalArgumentException();
 		}

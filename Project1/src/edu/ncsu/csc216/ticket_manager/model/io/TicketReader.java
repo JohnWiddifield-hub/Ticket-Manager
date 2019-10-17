@@ -76,6 +76,22 @@ public class TicketReader {
 	    		if(lineReader.hasNext()) {
 	    			code = lineReader.next();
 	    		} else code = "";
+	    		if(state.equals("Working") && code.contentEquals("Awaiting Caller")) {
+	    			lineReader.close();
+	    			throw new IllegalArgumentException();
+	    		} else if(state.equals("Working") && code.contentEquals("Solved")) {
+	    			lineReader.close();
+	    			throw new IllegalArgumentException();
+	    		} else if(state.equals("Working") && code.contentEquals("Duplicate")) {
+	    			lineReader.close();
+	    			throw new IllegalArgumentException();
+	    		} else if(state.equals("Resolved") && code.equals("Not Completed") && ticketType.equals("Request")) {
+	    			lineReader.close();	
+	    			throw new IllegalArgumentException();
+	    		} else if(state.equals("Resolved") && code.equals("Solved") && ticketType.equals("Incident")) {
+	    			lineReader.close();
+	    			throw new IllegalArgumentException();
+	    		}
 	    		lineReader.close();
 	    		
 	    	} else if(line.startsWith("-")) {
