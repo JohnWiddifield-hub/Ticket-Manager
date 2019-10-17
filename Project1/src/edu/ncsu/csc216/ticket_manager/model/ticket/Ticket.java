@@ -667,18 +667,18 @@ public class Ticket {
 	public String toString() {
 		
 		String output = "*" + ticketId + "#" + state.getStateName() + "#"  + this.getTicketTypeString() + "#" + subject + "#" + caller + "#" + getCategory()
-		 + "#" + getPriority() + "#" + getOwner() + "#" + "\n";
+		 + "#" + getPriority() + "#" + getOwner() + "#";
 
-		if (state instanceof CanceledState) {
+		if (getState().contentEquals(CANCELED_NAME)) {
 			output = output + this.getCancellationCode();
-		} else if(state instanceof ClosedState) {
+		} else if(getState().contentEquals(CLOSED_NAME)) {
 			output = output + this.getResolutionCode();
-		} else if(state instanceof FeedbackState) {
+		} else if(getState().contentEquals(FEEDBACK_NAME)) {
 			output = output + this.getFeedbackCode();
-		} else if(state instanceof ResolvedState) {
+		} else if(getState().contentEquals(RESOLVED_NAME)) {
 			output = output + this.getResolutionCode();
 		} 
-		
+		output = output + "\n";
 		output = output + this.getNotes();
 		
 		return output;
