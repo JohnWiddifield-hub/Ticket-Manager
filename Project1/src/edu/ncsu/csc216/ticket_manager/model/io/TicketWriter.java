@@ -30,7 +30,7 @@ public class TicketWriter {
 		 
 	        for (int i = 0; i < tickets.size(); i++) {
 	        	Ticket t = tickets.get(i);
-	            fileWriter.println(t.toString());
+	            fileWriter.print(t.toString());
 	        }
 	        
 	        fileWriter.close();
