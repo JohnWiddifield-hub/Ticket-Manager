@@ -35,6 +35,9 @@ public class TicketReaderTest {
 		assertEquals(t1.getCategory(), "Inquiry");
 		assertEquals(t1.getPriority(), "Medium");
 		assertEquals(t1.getResolutionCode(), "Not Completed");
+		
+		Ticket t2 = tickets.get(0);
+		
 	}
 
 }

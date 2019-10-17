@@ -72,8 +72,9 @@ public class TicketReader {
 	    		category = lineReader.next();
 	    		priority = lineReader.next();
 	    		owner = lineReader.next();
-	    		code = lineReader.next();
-	    		
+	    		if(lineReader.hasNext()) {
+	    			code = lineReader.next();
+	    		} else code = "";
 	    		lineReader.close();
 	    		
 	    	} else if(line.startsWith("-")) {
@@ -89,8 +90,12 @@ public class TicketReader {
 	    		note = note + " " + line;
 	    	}
 	    }
-	    tickets.add(new Ticket(Integer.parseInt(ticketId), state, ticketType, subject, caller, category, priority,
-				 owner, code, notes));
+		ticketId = ticketId.replace("*", "");
+		int id = Integer.parseInt(ticketId);
+		Ticket t = new Ticket(id, state, ticketType, subject, caller, category, priority,
+				 owner, code, notes);
+		tickets.add(t);
+	    fileReader.close();
 		} catch (Exception e) {
 			throw new IllegalArgumentException("Unable to load file.");
 		}
