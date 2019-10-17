@@ -601,7 +601,7 @@ public class TicketTest {
 		t = new Ticket(1, "New", "Request", "Me want new computer", "jfwiddif", "Hardware", 
 				"High", "bbaggins", null, note2);
 		
-		assertEquals(t.getNotes(), "-Me need u get me this computer\n");
+		assertEquals(t.getNotes(), "\n-Me need u get me this computer");
 	}
 	
 	/**

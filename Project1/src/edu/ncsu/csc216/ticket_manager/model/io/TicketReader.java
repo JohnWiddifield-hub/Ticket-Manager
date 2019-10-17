@@ -28,7 +28,7 @@ public class TicketReader {
 	 * 		   Message will be "Unable to load file."
 	 */
 	public static ArrayList<Ticket> readTicketFile(String fileName) throws FileNotFoundException{
-		
+		/*
     	String ticketId, state, ticketType, subject, caller, category, priority, owner, 
     	code;
     	ArrayList<String> notes = new ArrayList<String>();
@@ -84,6 +84,6 @@ public class TicketReader {
 			} else if (nextLine.startsWith("-")){
 				return nextLine;   
 			}
-			return "Mess-up";
+			return "Mess-up";*/ return null;
 	}
 }
