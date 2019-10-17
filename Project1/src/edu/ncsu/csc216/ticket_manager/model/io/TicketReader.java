@@ -91,6 +91,10 @@ public class TicketReader {
 	    		note = note + "\n" + line;
 	    	}
 	    }
+		if(!note.isEmpty()) {
+			notes.add(note);
+			note = "";
+		}
 		ticketId = ticketId.replace("*", "");
 		int id = Integer.parseInt(ticketId);
 		Ticket t = new Ticket(id, state, ticketType, subject, caller, category, priority,
