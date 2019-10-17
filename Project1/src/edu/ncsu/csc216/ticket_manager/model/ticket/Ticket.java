@@ -666,8 +666,8 @@ public class Ticket {
 	 */
 	public String toString() {
 		
-		String output = "*" + ticketId + "#" + state.getStateName() + "#"  + this.getTicketTypeString() + "#"+ subject + "#" + caller + "#" + getCategory()
-		 + "#" + getPriority() + "#" + getOwner() + "#";
+		String output = "*" + ticketId + "#" + state.getStateName() + "#"  + this.getTicketTypeString() + "#" + subject + "#" + caller + "#" + getCategory()
+		 + "#" + getPriority() + "#" + getOwner() + "#" + "\n";
 
 		if (state instanceof CanceledState) {
 			output = output + this.getCancellationCode();
