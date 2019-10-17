@@ -28,63 +28,56 @@ public class TicketReader {
 	 * 		   Message will be "Unable to load file."
 	 */
 	public static ArrayList<Ticket> readTicketFile(String fileName) {
-		/*
-    	String ticketId, state, ticketType, subject, caller, category, priority, owner, 
-    	code;
-    	ArrayList<String> notes = new ArrayList<String>();
 	    ArrayList<Ticket> tickets = new ArrayList<Ticket>();
+		try {
+    	String ticketId, state, ticketType, subject, caller, category, priority, owner, code;
+    	ticketId = null;
+    	state = "";
+    	ticketType = "";
+    	subject = "";
+    	caller = "";
+    	category = "";
+    	priority = "";
+    	owner = "";
+    	code = "";
+    	
+    	ArrayList<String> notes = new ArrayList<String>();
 	    Scanner fileReader = new Scanner(new FileInputStream(fileName));
 
 	    while(fileReader.hasNextLine()) {
-	    	
-	    }
-	    
-	    private static String readTicketLine(String nextLine) {
-	    	String ticketId, state, ticketType, subject, caller, category, priority, owner, 
-	    	code;
-	    
-			if(nextLine.startsWith("*")) {
-			String strFaux = nextLine.replaceFirst("*", "");
-			String str = strFaux.replace("\n", "");
-	    	Scanner lineReader = new Scanner(str);
-	    	String strCln = str;
-	    	
-	    	//make sure right amount of tokens
-	    	int cntr = 0;  
-	    	for (int i = 0; i < strCln.length(); i++) {
-	    	    if (strCln.charAt(i) == '#') {
-	    	        cntr++;
-	    	    }
-	    	}
-	    	
-	    	//check for wrong amount of tokens
-	    	if(cntr != 8) {
-	    		lineReader.close();
-	    		throw new IllegalArgumentException("Unable to load file.");
+	    	String line = fileReader.nextLine();
+	    	if(line.startsWith("*")) {
+	    		if(ticketId != null) {
+	    			tickets.add(new Ticket(Integer.parseInt(ticketId), state, ticketType, subject, caller, category, priority,
+	    					 owner, code, notes));
+	    		}
+	    		Scanner lineReader = new Scanner(line);
+	    		line = line.trim();
+	    		line = line.replace("*", "");
+	    		lineReader.useDelimiter("#");
 	    		
+	    		ticketId = lineReader.next();
+	    		state = lineReader.next();
+	    		ticketType = lineReader.next();
+	    		subject = lineReader.next();
+	    		caller = lineReader.next();
+	    		category = lineReader.next();
+	    		priority = lineReader.next();
+	    		owner = lineReader.next();
+	    		code = lineReader.next();
+	    		
+	    		lineReader.close();
+	    		
+	    	} else if(line.startsWith("-")) {
+	    		line = line.replace("-", "");
+	    		notes.add(line);
 	    	}
-	    	
-	    	lineReader.useDelimiter("#");
-	    	
-	    	ticketId = lineReader.next();
-	    	state = lineReader.next();
-	    	ticketType = lineReader.next();
-	    	subject = lineReader.next();
-	    	caller = lineReader.next();
-	    	category = lineReader.next();
-	    	priority = lineReader.next();
-	    	owner = lineReader.next();
-	    	code = lineReader.next();
-	    	
-	    	String output = ticketId + "#" + state + "#" + ticketType + "#" + subject + 
-	    			"#" + caller + "#" + category + "#" + priority + "#" + owner + "#" +
-	    			code;
-	    	lineReader.close();
-	    	return output;
-			} else if (nextLine.startsWith("-")){
-				return nextLine;   
-			}
-			*/
-			return null;
+	    }
+	    tickets.add(new Ticket(Integer.parseInt(ticketId), state, ticketType, subject, caller, category, priority,
+				 owner, code, notes));
+		} catch (Exception e) {
+			throw new IllegalArgumentException("Unable to load file.");
+		}
+			return tickets;
 	}
 }
