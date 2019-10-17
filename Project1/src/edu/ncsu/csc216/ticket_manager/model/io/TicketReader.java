@@ -97,6 +97,10 @@ public class TicketReader {
 		}
 		ticketId = ticketId.replace("*", "");
 		int id = Integer.parseInt(ticketId);
+		if(notes.isEmpty()) {
+			fileReader.close();
+			throw new IllegalArgumentException("Unable to load file.");
+		}
 		Ticket t = new Ticket(id, state, ticketType, subject, caller, category, priority,
 				 owner, code, notes);
 		notes = new ArrayList<String>();
