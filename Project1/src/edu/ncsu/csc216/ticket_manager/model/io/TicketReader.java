@@ -57,6 +57,7 @@ public class TicketReader {
 	    			int id = Integer.parseInt(ticketId);
 	    			Ticket t = new Ticket(id, state, ticketType, subject, caller, category, priority,
 	    					 owner, code, notes);
+	    			notes = new ArrayList<String>();
 	    			tickets.add(t);
 	    		}
 	    		Scanner lineReader = new Scanner(line);
@@ -94,6 +95,7 @@ public class TicketReader {
 		int id = Integer.parseInt(ticketId);
 		Ticket t = new Ticket(id, state, ticketType, subject, caller, category, priority,
 				 owner, code, notes);
+		notes = new ArrayList<String>();
 		tickets.add(t);
 	    fileReader.close();
 		} catch (Exception e) {
