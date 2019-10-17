@@ -87,7 +87,7 @@ public class TicketReader {
 	    		note = note + line;
 	    	} else if(!line.startsWith("-") && !line.startsWith("*")) {
 	    		
-	    		note = note + " " + line;
+	    		note = note + "\n" + line;
 	    	}
 	    }
 		ticketId = ticketId.replace("*", "");
