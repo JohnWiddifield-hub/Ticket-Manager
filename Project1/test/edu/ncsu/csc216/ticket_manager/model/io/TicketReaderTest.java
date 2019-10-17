@@ -23,20 +23,28 @@ public class TicketReaderTest {
 	 */
 	@Test
 	public void testReadTicketFile() {
-		/** Valid ticket records */
+		try {
 		String validTestFile = "test-files/ticket2.txt";
 		ArrayList<Ticket> tickets = TicketReader.readTicketFile(validTestFile);
-		Ticket t1 = tickets.get(0);
-		assertEquals(t1.getTicketId(), 3);
-		assertEquals(t1.getState(), "Closed");
-		assertEquals(t1.getTicketTypeString(), "Request");
-		assertEquals(t1.getSubject(), "Subject line");
-		assertEquals(t1.getCaller(), "caller");
-		assertEquals(t1.getCategory(), "Inquiry");
-		assertEquals(t1.getPriority(), "Medium");
-		assertEquals(t1.getResolutionCode(), "Not Completed");
+		} catch (IllegalArgumentException e) {
+			fail();
+		}
 		
-		Ticket t2 = tickets.get(0);
+		try {
+		String validTestFile = "test-files/ticket1.txt";
+		ArrayList<Ticket> tickets = TicketReader.readTicketFile(validTestFile);
+		} catch (IllegalArgumentException e) {
+			fail();
+		}
+		
+		try {
+		String validTestFile = "test-files/ticket3.txt";
+		ArrayList<Ticket> tickets = TicketReader.readTicketFile(validTestFile);
+		fail();
+		} catch (Exception e) {
+			assertEquals(e.getMessage(), "Unable to load file.");
+		}
+		
 		
 	}
 
