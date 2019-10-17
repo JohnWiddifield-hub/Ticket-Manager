@@ -53,8 +53,11 @@ public class TicketReader {
 	    			note = "";
 	    		}
 	    		if(ticketId != null) {
-	    			tickets.add(new Ticket(Integer.parseInt(ticketId), state, ticketType, subject, caller, category, priority,
-	    					 owner, code, notes));
+	    			ticketId = ticketId.replace("*", "");
+	    			int id = Integer.parseInt(ticketId);
+	    			Ticket t = new Ticket(id, state, ticketType, subject, caller, category, priority,
+	    					 owner, code, notes);
+	    			tickets.add(t);
 	    		}
 	    		Scanner lineReader = new Scanner(line);
 	    		line = line.trim();
@@ -75,11 +78,15 @@ public class TicketReader {
 	    		
 	    	} else if(line.startsWith("-")) {
 
+	    		if(!note.isEmpty()) {
+	    			notes.add(note);
+	    			note = "";
+	    		}
 	    		line = line.replace("-", "");
 	    		note = note + line;
 	    	} else if(!line.startsWith("-") && !line.startsWith("*")) {
 	    		
-	    		note = note + line;
+	    		note = note + " " + line;
 	    	}
 	    }
 	    tickets.add(new Ticket(Integer.parseInt(ticketId), state, ticketType, subject, caller, category, priority,

@@ -141,33 +141,33 @@ public class Ticket {
 			this.setState(state);
 		} else throw new IllegalArgumentException();
 		
-		if(ticketType == TT_INCIDENT) {
+		if(ticketType.contentEquals(TT_INCIDENT)) {
 			this.setTicketType(ticketType);
-		} else if(ticketType == TT_REQUEST) {
+		} else if(ticketType.contentEquals(TT_REQUEST)) {
 			this.setTicketType(ticketType);
 		} else throw new IllegalArgumentException();
 		
-		if(category == C_SOFTWARE) {
+		if(category.contentEquals(C_SOFTWARE)) {
 			this.setCategory(C_SOFTWARE);
-		} else if(category == C_HARDWARE) {
+		} else if(category.contentEquals(C_HARDWARE)) {
 			this.setCategory(C_HARDWARE);
-		} else if(category == C_INQUIRY) {
+		} else if(category.contentEquals(C_INQUIRY)) {
 			this.setCategory(C_INQUIRY);
-		} else if(category == C_DATABASE) {
+		} else if(category.contentEquals(C_DATABASE)) {
 			this.setCategory(C_DATABASE);
-		} else if(category == C_NETWORK) {
+		} else if(category.contentEquals(C_NETWORK)) {
 			this.setCategory(C_NETWORK);
 		} else throw new IllegalArgumentException();
 		
 		if(priority == null) {
 			throw new IllegalArgumentException();
-		} else if(priority == P_HIGH) {
+		} else if(priority.contentEquals(P_HIGH)) {
 			this.setPriority(P_HIGH);
-		} else if(priority == P_MEDIUM) {
+		} else if(priority.contentEquals(P_MEDIUM)) {
 			this.setPriority(P_MEDIUM);
-		} else if(priority == P_LOW) {
+		} else if(priority.contentEquals(P_LOW)) {
 			this.setPriority(P_LOW);
-		} else if(priority == P_URGENT) {
+		} else if(priority.contentEquals(P_URGENT)) {
 			this.setPriority(P_URGENT);
 		} else throw new IllegalArgumentException();
 		
@@ -653,9 +653,9 @@ public class Ticket {
 	 * @param ticketType		TicketType to set the ticket to
 	 */
 	private void setTicketType(String ticketType) {
-		if(ticketType == TT_INCIDENT) {
+		if(ticketType.contentEquals(TT_INCIDENT)) {
 			this.ticketType = TicketType.INCIDENT;
-		} else if(ticketType == TT_REQUEST) {
+		} else if(ticketType.contentEquals(TT_REQUEST)) {
 			this.ticketType = TicketType.REQUEST;
 		} else throw new IllegalArgumentException();
 	}
