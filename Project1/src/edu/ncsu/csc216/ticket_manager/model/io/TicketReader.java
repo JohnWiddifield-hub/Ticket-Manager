@@ -84,6 +84,7 @@ public class TicketReader {
 			} else if (nextLine.startsWith("-")){
 				return nextLine;   
 			}
-			return "Mess-up";*/ return null;
+			*/
+			return null;
 	}
 }

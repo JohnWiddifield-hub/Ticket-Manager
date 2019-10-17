@@ -24,7 +24,7 @@ public class TicketWriterTest {
 	 * This method tests the writeTicketFile for proper writing of tickets to a file.
 	 * @throws IOException if file cannot be written to
 	 */
-/*	@Test
+	@Test
 	public void testWriteTicketFile() throws IOException {
 		ArrayList<String> note = new ArrayList<String>();
 		note.add("a note");
@@ -56,6 +56,6 @@ public class TicketWriterTest {
 		} catch (IOException e) {
 			fail("Error reading files.");
 		}
-	}*/
+	}
 
 }

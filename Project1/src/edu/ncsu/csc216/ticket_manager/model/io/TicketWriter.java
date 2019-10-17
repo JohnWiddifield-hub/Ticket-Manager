@@ -1,7 +1,6 @@
 package edu.ncsu.csc216.ticket_manager.model.io;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 //import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintStream;
@@ -28,7 +27,6 @@ public class TicketWriter {
 	public static void writeTicketFile(String fileName, List<Ticket> tickets) {
 		try {
 		 PrintStream fileWriter = new PrintStream(new File(fileName));
-		
 		 
 	        for (int i = 0; i < tickets.size(); i++) {
 	        	Ticket t = tickets.get(i);
