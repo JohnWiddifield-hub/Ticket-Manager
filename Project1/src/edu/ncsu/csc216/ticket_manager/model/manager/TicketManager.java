@@ -23,8 +23,6 @@ public class TicketManager {
 	
 	private static TicketManager instance;
 	private TicketList list = new TicketList();
-	private TicketList loadedList = new TicketList();
-	private TicketList newList = new TicketList();
 	private TicketList typeList = new TicketList();
 
 	/**

@@ -48,6 +48,14 @@ public class TicketWriterTest {
 		
 		TicketWriter.writeTicketFile("test-files/created_file.txt", tickets);
 		checkFiles("test-files/created_file.txt", "test-files/expected_file.txt");
+		
+		try {
+			TicketWriter.writeTicketFile(null, tickets);
+			fail();
+		} catch (Exception e) {
+			assertEquals(e.getMessage(), "Unable to save file.");
+		}
+		
 	}
 	
 	private void checkFiles(String expFile, String actFile) {
