@@ -19,6 +19,7 @@ import edu.ncsu.csc216.ticket_manager.model.ticket.Ticket.TicketType;
  *
  */
 public class TicketListTest {
+	TicketList list = new TicketList();
 
 	/**
 	 * Tests the ticketList Constructor for proper construction of a list able to
@@ -37,13 +38,14 @@ public class TicketListTest {
 	 */
 	@Test
 	public void testAddTicket() {
-		TicketList list = new TicketList();
 		
 		list.addTicket(TicketType.INCIDENT, "subject", "caller", Category.NETWORK, Priority.HIGH, "note");
 		list.addTicket(TicketType.INCIDENT, "subject", "caller", Category.HARDWARE, Priority.LOW, "note");
 		
 		assertTrue(list.getTicketById(2).getCategory().contentEquals("Hardware"));
+		assertTrue(list.getTicketById(1).getCategory().contentEquals("Network"));
 		
+		assertEquals(list.addTicket(TicketType.INCIDENT, null, "ID10T", Category.INQUIRY, Priority.URGENT, "oh no!"), -1);
 		
 	}
 
@@ -53,7 +55,19 @@ public class TicketListTest {
 	 */
 	@Test
 	public void testAddTickets() {
-		fail("Not yet implemented");
+		ArrayList<Ticket> newlist = new ArrayList<Ticket>();
+		newlist.add(new Ticket(TicketType.INCIDENT, "subject", "caller", Category.SOFTWARE, Priority.LOW, "note"));
+		newlist.add(new Ticket(TicketType.INCIDENT, "subject", "caller", Category.DATABASE, Priority.HIGH, "note"));
+		
+		list.addTickets(newlist);
+		
+		assertTrue(list.getTicketById(1).getCategory().equals("Software"));
+		assertTrue(list.getTicketById(2).getCategory().equals("Database"));
+		
+		newlist.clear();
+		list.addTickets(newlist);
+		assertTrue(list.getTickets().isEmpty());
+		
 	}
 
 	/**
@@ -70,7 +84,17 @@ public class TicketListTest {
 	 */
 	@Test
 	public void testGetTicketsByType() {
-		fail("Not yet implemented");
+		try {
+			list.getTicketsByType(null);
+			fail();
+		} catch (IllegalArgumentException e) {
+			assertTrue(list.getTickets().isEmpty());
+		}
+		list.addTicket(TicketType.INCIDENT, "subject", "caller", Category.NETWORK, Priority.HIGH, "note");
+		list.addTicket(TicketType.Request, "subject", "caller", Category.DATABASE, Priority.HIGH, "note");
+		
+		ArrayList<Ticket> incidents = new ArrayList<Ticket>();
+		incidents = list.getTicketsByType(TicketType.INCIDENT);
 	}
 
 	/**

@@ -83,7 +83,7 @@ public class TicketList {
 	 * @param type	Ticket Type to receive from the list
 	 * @return	list of tickets partaining to the specific type
 	 */
-	public List<Ticket> getTicketsByType(TicketType type){
+	public ArrayList<Ticket> getTicketsByType(TicketType type){
 		if(type == null) {
 			throw new IllegalArgumentException();
 		}
