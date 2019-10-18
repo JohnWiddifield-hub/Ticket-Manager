@@ -29,6 +29,7 @@ public class TicketManagerTest {
 	 */
 	@Test
 	public void testSaveTicketsToFile() {
+		TicketManager.getInstance().createNewTicketList();
 		TicketManager.getInstance().addTicketToList(TicketType.REQUEST, "subject", "caller", Category.DATABASE, Priority.HIGH, "a note");
 		TicketManager.getInstance().addTicketToList(TicketType.INCIDENT, "subject2", "caller2", Category.SOFTWARE, Priority.MEDIUM, "a note");
 		TicketManager.getInstance().addTicketToList(TicketType.REQUEST, "subject3", "caller3", Category.HARDWARE, Priority.LOW, "a note");
@@ -46,13 +47,7 @@ public class TicketManagerTest {
 	public void testLoadTicketsFromFile() {
 		fail("Not yet implemented");
 	}
-	/**
-	 * Tests the createNewTicketList method for proper creation of new ticket lists.
-	 */
-	@Test
-	public void testCreateNewTicketList() {
-		fail("Not yet implemented");
-	}
+	
 	/**
 	 * Tests the getTicketsForDisplay method for proper retrieval of Tickets for displayment.
 	 */
@@ -66,7 +61,25 @@ public class TicketManagerTest {
 	 */
 	@Test
 	public void testGetTicketsForDisplayByType() {
-		fail("Not yet implemented");
+		TicketManager.getInstance().createNewTicketList();
+		
+		TicketManager.getInstance().addTicketToList(TicketType.REQUEST, "subject", "caller", Category.DATABASE, Priority.HIGH, "a note");
+		TicketManager.getInstance().addTicketToList(TicketType.INCIDENT, "subject2", "caller2", Category.SOFTWARE, Priority.MEDIUM, "a note");
+		TicketManager.getInstance().addTicketToList(TicketType.REQUEST, "subject3", "caller3", Category.HARDWARE, Priority.LOW, "a note");
+		
+		String[][] array = TicketManager.getInstance().getTicketsForDisplayByType(TicketType.REQUEST);
+		assertTrue(array[0][0].contentEquals("1"));
+		assertTrue(array[0][1].contentEquals("Request"));
+		assertTrue(array[0][2].contentEquals("New"));
+		assertTrue(array[0][3].contentEquals("subject"));
+		assertTrue(array[0][4].contentEquals("Database"));
+		assertTrue(array[0][5].contentEquals("High"));
+		assertTrue(array[1][0].contentEquals("3"));
+		assertTrue(array[1][1].contentEquals("Request"));
+		assertTrue(array[1][2].contentEquals("New"));
+		assertTrue(array[1][3].contentEquals("subject3"));
+		assertTrue(array[1][4].contentEquals("Hardware"));
+		assertTrue(array[1][5].contentEquals("Low"));
 	}
 
 	/**

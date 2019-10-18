@@ -108,12 +108,12 @@ public class TicketManager {
 		
 		String[][] display = new String[typeList.getTickets().size()][6];
 		for(int i = 0; i < typeList.getTickets().size(); i++) {
-			display[i][0] = Integer.toString(typeList.getTicketById(i + 1).getTicketId());
-			display[i][1] = typeList.getTicketById(i + 1).getTicketTypeString();
-			display[i][2] = typeList.getTicketById(i + 1).getState();
-			display[i][3] = typeList.getTicketById(i + 1).getSubject();
-			display[i][4] = typeList.getTicketById(i + 1).getCategory();
-			display[i][5] = typeList.getTicketById(i + 1).getPriority();
+			display[i][0] = Integer.toString(tempTypeList.get(i).getTicketId());
+			display[i][1] = tempTypeList.get(i).getTicketTypeString();
+			display[i][2] = tempTypeList.get(i).getState();
+			display[i][3] = tempTypeList.get(i).getSubject();
+			display[i][4] = tempTypeList.get(i).getCategory();
+			display[i][5] = tempTypeList.get(i).getPriority();
 		}
 		
 		return display;
@@ -125,7 +125,7 @@ public class TicketManager {
 	 * @return				Ticket with matching ID
 	 */
 	public Ticket getTicketById(int id) {
-		return list.getTicketById(id);
+		return getTicketById(id);
 	}
 	
 	/**
