@@ -50,7 +50,7 @@ public class TicketList {
 	
 	/**
 	 * Adds a list of Tickets to the list
-	 * @param list			List<Ticket> List of tickets to add
+	 * @param list	List of tickets to add
 	 */
 	public void addTickets(List<Ticket> list) {
 		int max = 0;
@@ -72,7 +72,7 @@ public class TicketList {
 	
 	/**
 	 * Gets Tickets from the list
-	 * @return List<Ticket> list of Tickets
+	 * @return ArrayList of Tickets
 	 */
 	public ArrayList<Ticket> getTickets(){
 		return tickets;

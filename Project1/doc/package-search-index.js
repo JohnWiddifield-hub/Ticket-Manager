@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","url":"allpackages-index.html"},{"l":"edu.ncsu.csc216.ticket_manager.model.command"},{"l":"edu.ncsu.csc216.ticket_manager.model.io"},{"l":"edu.ncsu.csc216.ticket_manager.model.manager"},{"l":"edu.ncsu.csc216.ticket_manager.model.ticket"},{"l":"edu.ncsu.csc216.ticket_manager.view.ui"}]

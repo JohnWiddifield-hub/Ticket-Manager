@@ -22,7 +22,6 @@ public class TicketReader {
 	 * -note
 	 * @param fileName			Name of the file to read from.
 	 * @return 					An ArrayList of tickets that were read from the file.
-	 * @throws FileNotFoundException 	if the file is nowhere to be found.
 	 * @throws IllegalArgumentException if there are problems processing the file.
 	 * 		   Message will be "Unable to load file."
 	 */

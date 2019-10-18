@@ -21,7 +21,6 @@ public class TicketWriter {
 	 * to be used with reading the file later using TicketReader.java
 	 * @param fileName			File name of the file to write to
 	 * @param tickets			List of Ticket objects you would like to write to a file
-	 * @throws IOException when a file cannot be created
 	 * @throws IllegalArgumentException if there are any errors with the message "Unable to save file"
 	 */
 	public static void writeTicketFile(String fileName, List<Ticket> tickets) {

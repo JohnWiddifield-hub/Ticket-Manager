@@ -19,7 +19,6 @@ public class TicketReaderTest {
 
 	/**
 	 * Tests the ticketReadFile method for correct reading from a file.
-	 * @throws FileNotFoundException if the file cannot be found
 	 */
 	@Test
 	public void testReadTicketFile() {

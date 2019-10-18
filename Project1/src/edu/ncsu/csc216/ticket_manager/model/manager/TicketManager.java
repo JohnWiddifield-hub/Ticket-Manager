@@ -76,14 +76,19 @@ public class TicketManager {
 	 * @return		2D String array for displaying the Tickets
 	 */
 	public String[][] getTicketsForDisplay(){
+		
+		ArrayList<Ticket> tempList;
+		tempList = list.getTickets();
+		typeList.addTickets(tempList);
+		
 		String[][] display = new String[list.getTickets().size()][6];
 		for(int i = 0; i < list.getTickets().size(); i++) {
-			display[i][0] = Integer.toString(list.getTicketById(i + 1).getTicketId());
-			display[i][1] = list.getTicketById(i + 1).getTicketTypeString();
-			display[i][2] = list.getTicketById(i + 1).getState();
-			display[i][3] = list.getTicketById(i + 1).getSubject();
-			display[i][4] = list.getTicketById(i + 1).getCategory();
-			display[i][5] = list.getTicketById(i + 1).getPriority();
+			display[i][0] = Integer.toString(tempList.get(i).getTicketId());
+			display[i][1] = tempList.get(i).getTicketTypeString();
+			display[i][2] = tempList.get(i).getState();
+			display[i][3] = tempList.get(i).getSubject();
+			display[i][4] = tempList.get(i).getCategory();
+			display[i][5] = tempList.get(i).getPriority();
 			
 		}
 		return display;
