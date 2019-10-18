@@ -36,13 +36,13 @@ public class TicketList {
 	 * @param category				Category enum that represents the type of Category
 	 * @param priority				Priority enum that represents the type of Priority
 	 * @param note					Note provided by user about the Ticket
-	 * @return 1 if Ticket is added successfully, -1 if unsuccessful
+	 * @return  Ticket Id of the added ticket, -1 if unsuccessful
 	 */
 	public int addTicket(TicketType ticketType, String subject, String caller, Category category,
 			Priority priority, String note) {
 		try {
 		tickets.add(new Ticket(ticketType, subject, caller, category, priority, note));
-		return tickets.get(tickets.size()-1).getTicketId();
+		return tickets.get(tickets.size() - 1).getTicketId();
 		} catch (Exception e) {
 			return -1;
 		}
@@ -55,6 +55,10 @@ public class TicketList {
 	public void addTickets(List<Ticket> list) {
 		int max = 0;
 		tickets.clear();
+		
+		if(list.isEmpty()) {
+			return;
+		}
 		
 		for(int i = 0; i < list.size(); i++) {
 			tickets.add(list.get(i));
