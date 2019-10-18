@@ -125,7 +125,7 @@ public class TicketManager {
 	 * @return				Ticket with matching ID
 	 */
 	public Ticket getTicketById(int id) {
-		return getTicketById(id);
+		return list.getTicketById(id);
 	}
 	
 	/**
