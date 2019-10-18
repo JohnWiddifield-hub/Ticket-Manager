@@ -91,7 +91,7 @@ public class TicketListTest {
 			assertTrue(list.getTickets().isEmpty());
 		}
 		list.addTicket(TicketType.INCIDENT, "subject", "caller", Category.NETWORK, Priority.HIGH, "note");
-		list.addTicket(TicketType.Request, "subject", "caller", Category.DATABASE, Priority.HIGH, "note");
+		list.addTicket(TicketType.REQUEST, "subject", "caller", Category.DATABASE, Priority.HIGH, "note");
 		
 		ArrayList<Ticket> incidents = new ArrayList<Ticket>();
 		incidents = list.getTicketsByType(TicketType.INCIDENT);
