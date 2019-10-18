@@ -116,6 +116,9 @@ public class TicketList {
 	 * @param command		Command to execute on the Ticket
 	 */
 	public void executeCommand(int id, Command command) {
+		if(tickets.isEmpty()) {
+			return;
+		}
 		getTicketById(id).update(command);
 	}
 	
