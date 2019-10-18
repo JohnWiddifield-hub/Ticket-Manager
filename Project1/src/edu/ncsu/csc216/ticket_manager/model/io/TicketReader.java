@@ -4,7 +4,6 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.*;
 
 import edu.ncsu.csc216.ticket_manager.model.ticket.Ticket;
 

@@ -11,9 +11,6 @@ import java.util.Scanner;
 import org.junit.Test;
 
 import edu.ncsu.csc216.ticket_manager.model.ticket.Ticket;
-import edu.ncsu.csc216.ticket_manager.model.ticket.Ticket.Category;
-import edu.ncsu.csc216.ticket_manager.model.ticket.Ticket.Priority;
-import edu.ncsu.csc216.ticket_manager.model.ticket.Ticket.TicketType;
 /**
  * This class tests the TicketWriter class for proper functionality and implementation
  * based on the requirements.

@@ -397,7 +397,7 @@ public class Ticket {
 	public String getFeedbackCode() {
 		if(feedbackCode == FeedbackCode.AWAITING_CALLER) {
 			return "Awaiting Caller";
-		} else if(feedbackCode== FeedbackCode.AWAITING_CHANGE) {
+		} else if(feedbackCode == FeedbackCode.AWAITING_CHANGE) {
 			return "Awaiting Change";
 		} else if(feedbackCode == FeedbackCode.AWAITING_PROVIDER) {
 			return "Awaiting Provider";

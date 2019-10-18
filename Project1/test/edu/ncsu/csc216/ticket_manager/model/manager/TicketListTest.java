@@ -3,7 +3,6 @@ package edu.ncsu.csc216.ticket_manager.model.manager;
 import static org.junit.Assert.*;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import org.junit.Test;
 
@@ -28,7 +27,7 @@ public class TicketListTest {
 	 */
 	@Test
 	public void testTicketList() {
-		TicketList list = new TicketList();
+		list = new TicketList();
 		
 		list.getTickets();
 		
