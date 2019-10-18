@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.junit.Test;
 
+import edu.ncsu.csc216.ticket_manager.model.command.Command;
 import edu.ncsu.csc216.ticket_manager.model.ticket.Ticket;
 import edu.ncsu.csc216.ticket_manager.model.ticket.Ticket.Category;
 import edu.ncsu.csc216.ticket_manager.model.ticket.Ticket.Priority;
@@ -71,14 +72,6 @@ public class TicketListTest {
 	}
 
 	/**
-	 * Tests the getTickets method for proper returning of tickets.
-	 */
-	@Test
-	public void testGetTickets() {
-		fail("Not yet implemented");
-	}
-
-	/**
 	 * Tests the getTicketsByType method for proper returning of tickets
 	 * based on their type
 	 */
@@ -103,7 +96,8 @@ public class TicketListTest {
 	 */
 	@Test
 	public void testGetTicketById() {
-		fail("Not yet implemented");
+		
+		assertTrue(list.getTicketById(10) == null);
 	}
 
 	/**
@@ -111,7 +105,17 @@ public class TicketListTest {
 	 */
 	@Test
 	public void testExecuteCommand() {
-		fail("Not yet implemented");
+		list.addTicket(TicketType.REQUEST, "subject", "caller", Category.DATABASE, Priority.HIGH, "note");
+		list.executeCommand(1, new Command(Command.CommandValue.PROCESS, "owner", null, null, null, "a note"));
+		assertEquals(list.getTicketById(1).getState(), "Working");
+		
+		try {
+		ArrayList<Ticket> newlist2 = new ArrayList<Ticket>();
+		list.addTickets(newlist2);
+		list.executeCommand(1, new Command(Command.CommandValue.PROCESS, "owner", null, null, null, "a note"));
+		} catch (Exception e) {
+			fail();
+		}
 	}
 
 	/**
@@ -120,7 +124,9 @@ public class TicketListTest {
 	 */
 	@Test
 	public void testDeleteTicketById() {
-		fail("Not yet implemented");
+		list.addTicket(TicketType.REQUEST, "subject", "caller", Category.DATABASE, Priority.HIGH, "note");
+		list.deleteTicketById(1);
+		assertTrue(list.getTickets().isEmpty());
 	}
 
 }

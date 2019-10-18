@@ -74,7 +74,7 @@ public class TicketList {
 	 * Gets Tickets from the list
 	 * @return List<Ticket> list of Tickets
 	 */
-	public List<Ticket> getTickets(){
+	public ArrayList<Ticket> getTickets(){
 		return tickets;
 	}
 	
