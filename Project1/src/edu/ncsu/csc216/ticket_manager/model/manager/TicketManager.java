@@ -104,16 +104,16 @@ public class TicketManager {
 		
 		ArrayList<Ticket> tempTypeList;
 		tempTypeList = list.getTicketsByType(ticketType);
-		typeList.addTickets(tempTypeList);
+		list.addTickets(tempTypeList);
 		
-		String[][] display = new String[typeList.getTickets().size()][6];
-		for(int i = 0; i < typeList.getTickets().size(); i++) {
-			display[i][0] = Integer.toString(typeList.getTicketById(i + 1).getTicketId());
-			display[i][1] = typeList.getTicketById(i + 1).getTicketTypeString();
-			display[i][2] = typeList.getTicketById(i + 1).getState();
-			display[i][3] = typeList.getTicketById(i + 1).getSubject();
-			display[i][4] = typeList.getTicketById(i + 1).getCategory();
-			display[i][5] = typeList.getTicketById(i + 1).getPriority();
+		String[][] display = new String[list.getTickets().size()][6];
+		for(int i = 0; i < list.getTickets().size(); i++) {
+			display[i][0] = Integer.toString(list.getTicketById(i + 1).getTicketId());
+			display[i][1] = list.getTicketById(i + 1).getTicketTypeString();
+			display[i][2] = list.getTicketById(i + 1).getState();
+			display[i][3] = list.getTicketById(i + 1).getSubject();
+			display[i][4] = list.getTicketById(i + 1).getCategory();
+			display[i][5] = list.getTicketById(i + 1).getPriority();
 		}
 		
 		return display;
