@@ -63,7 +63,7 @@ public class TicketManager {
 		
 		ArrayList<Ticket> tempLoadedList;
 		tempLoadedList = TicketReader.readTicketFile(fileName);
-		loadedList.addTickets(tempLoadedList);
+		list.addTickets(tempLoadedList);
 		
 	}
 	
