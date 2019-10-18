@@ -3,6 +3,10 @@ package edu.ncsu.csc216.ticket_manager.model.manager;
 import static org.junit.Assert.*;
 
 import org.junit.Test;
+
+import edu.ncsu.csc216.ticket_manager.model.ticket.Ticket.Category;
+import edu.ncsu.csc216.ticket_manager.model.ticket.Ticket.Priority;
+import edu.ncsu.csc216.ticket_manager.model.ticket.Ticket.TicketType;
 /**
  * This class tests the TicketList class for proper implementation and functionality
  * based on the requirements as well as TicketList's API
@@ -18,7 +22,8 @@ public class TicketListTest {
 	 */
 	@Test
 	public void testTicketList() {
-		fail("Not yet implemented");
+		TicketList list = new TicketList();
+		
 	}
 
 	/**
@@ -26,7 +31,14 @@ public class TicketListTest {
 	 */
 	@Test
 	public void testAddTicket() {
-		fail("Not yet implemented");
+		TicketList list = new TicketList();
+		
+		list.addTicket(TicketType.INCIDENT, "subject", "caller", Category.NETWORK, Priority.HIGH, "note");
+		list.addTicket(TicketType.INCIDENT, "subject", "caller", Category.HARDWARE, Priority.LOW, "note");
+		
+		assertTrue(list.getTicketById(2).getCategory().contentEquals("Hardware"));
+		
+		
 	}
 
 	/**
