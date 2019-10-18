@@ -84,6 +84,9 @@ public class TicketList {
 	 * @return	list of tickets partaining to the specific type
 	 */
 	public List<Ticket> getTicketsByType(TicketType type){
+		if(type == null) {
+			throw new IllegalArgumentException();
+		}
 		ArrayList<Ticket> filtered = new ArrayList<Ticket>();
 		for(int i = 0; i < tickets.size(); i++) {
 			if(tickets.get(i).getTicketType() == type) {
