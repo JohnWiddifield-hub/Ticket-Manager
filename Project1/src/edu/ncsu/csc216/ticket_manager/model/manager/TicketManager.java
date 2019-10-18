@@ -79,7 +79,7 @@ public class TicketManager {
 	 * @return		2D String array for displaying the Tickets
 	 */
 	public String[][] getTicketsForDisplay(){
-		String[][] display = new String[list.getTickets().size()][5];
+		String[][] display = new String[list.getTickets().size()][6];
 		for(int i = 0; i < list.getTickets().size(); i++) {
 			display[i][0] = Integer.toString(list.getTicketById(i + 1).getTicketId());
 			display[i][1] = list.getTicketById(i + 1).getTicketTypeString();
@@ -106,7 +106,7 @@ public class TicketManager {
 		tempTypeList = list.getTicketsByType(ticketType);
 		typeList.addTickets(tempTypeList);
 		
-		String[][] display = new String[typeList.getTickets().size()][5];
+		String[][] display = new String[typeList.getTickets().size()][6];
 		for(int i = 0; i < typeList.getTickets().size(); i++) {
 			display[i][0] = Integer.toString(typeList.getTicketById(i + 1).getTicketId());
 			display[i][1] = typeList.getTicketById(i + 1).getTicketTypeString();
