@@ -4,6 +4,10 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import edu.ncsu.csc216.ticket_manager.model.ticket.Ticket.Category;
+import edu.ncsu.csc216.ticket_manager.model.ticket.Ticket.Priority;
+import edu.ncsu.csc216.ticket_manager.model.ticket.Ticket.TicketType;
+
 /**
  * This tests the TicketManager class for proper implementation and functionality based on the requirements
  * as well as the API for the TicketManager Class.
@@ -25,7 +29,14 @@ public class TicketManagerTest {
 	 */
 	@Test
 	public void testSaveTicketsToFile() {
-		fail("Not yet implemented");
+		TicketManager.getInstance().addTicketToList(TicketType.REQUEST, "subject", "caller", Category.DATABASE, Priority.HIGH, "a note");
+		TicketManager.getInstance().addTicketToList(TicketType.INCIDENT, "subject2", "caller2", Category.SOFTWARE, Priority.MEDIUM, "a note");
+		TicketManager.getInstance().addTicketToList(TicketType.REQUEST, "subject3", "caller3", Category.HARDWARE, Priority.LOW, "a note");
+		try {
+		TicketManager.getInstance().saveTicketsToFile("test-files/created_file.txt");
+		} catch (Exception e) {
+			fail();
+		}
 	}
 
 	/**

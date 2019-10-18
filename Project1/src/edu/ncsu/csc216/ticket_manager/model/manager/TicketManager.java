@@ -71,7 +71,7 @@ public class TicketManager {
 	 * Creates a new TicketList
 	 */
 	public void createNewTicketList() {
-		newList = new TicketList();
+		list = new TicketList();
 	}
 	
 	/**
