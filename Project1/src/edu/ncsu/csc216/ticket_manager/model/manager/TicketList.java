@@ -42,7 +42,7 @@ public class TicketList {
 			Priority priority, String note) {
 		try {
 		tickets.add(new Ticket(ticketType, subject, caller, category, priority, note));
-		return 1;
+		return tickets.get(tickets.size()-1).getTicketId();
 		} catch (Exception e) {
 			return -1;
 		}
