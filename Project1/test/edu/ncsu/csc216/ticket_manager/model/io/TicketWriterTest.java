@@ -29,16 +29,19 @@ public class TicketWriterTest {
 	 */
 	@Test
 	public void testWriteTicketFile() throws IOException {
+		@SuppressWarnings("unused")
+		TicketWriter writer = new TicketWriter();
 		ArrayList<String> note = new ArrayList<String>();
 		note.add("a note");
 		note.add("a second note");
 		
 		Ticket t = new Ticket(1, "New", "Request", "Me want new computer", "jfwiddif", "Hardware", 
 				"High", "bbaggins", null, note);
-		Ticket t2 = new Ticket(4, "New", "Request", "Me want new computer", "jfwiddif", "Inquiry", 
+		Ticket t2 = new Ticket(2, "New", "Request", "Me want new computer", "jfwiddif", "Inquiry", 
 				"Urgent", "", "", note);
-		Ticket t3 = new Ticket(TicketType.INCIDENT, "Subject", "Caller", Category.NETWORK, Priority.LOW, "note");
-		Ticket t4 = new Ticket(14, "Resolved", "Incident", "Me want new computer", "jfwiddif", "Network", 
+		Ticket t3 = new Ticket(3, "New", "Incident", "Me want new computer", "jfwiddif", "Software", 
+				"Urgent", "", "", note);
+		Ticket t4 = new Ticket(4, "Resolved", "Incident", "Me want new computer", "jfwiddif", "Network", 
 				"Low", "bbaggins", "Workaround", note);
 		List<Ticket> tickets = new ArrayList<Ticket>();
 		tickets.add(t);
@@ -55,6 +58,8 @@ public class TicketWriterTest {
 		} catch (Exception e) {
 			assertEquals(e.getMessage(), "Unable to save file.");
 		}
+		
+		
 		
 	}
 	

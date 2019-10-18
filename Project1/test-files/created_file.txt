@@ -1,11 +1,12 @@
 *1#New#Request#Me want new computer#jfwiddif#Hardware#High#bbaggins#
 -a note
 -a second note
-*4#New#Request#Me want new computer#jfwiddif#Inquiry#Urgent##
+*2#New#Request#Me want new computer#jfwiddif#Inquiry#Urgent##
 -a note
 -a second note
-*5#New#Incident#Subject#Caller#Network#Low##
--note
-*14#Resolved#Incident#Me want new computer#jfwiddif#Network#Low#bbaggins#Workaround
+*3#New#Incident#Me want new computer#jfwiddif#Software#Urgent##
+-a note
+-a second note
+*4#Resolved#Incident#Me want new computer#jfwiddif#Network#Low#bbaggins#Workaround
 -a note
 -a second note

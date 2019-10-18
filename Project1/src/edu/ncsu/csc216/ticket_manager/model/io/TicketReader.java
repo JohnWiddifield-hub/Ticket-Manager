@@ -86,10 +86,10 @@ public class TicketReader {
 	    		} else if(state.equals("Working") && code.contentEquals("Duplicate")) {
 	    			lineReader.close();
 	    			throw new IllegalArgumentException();
-	    		} else if(state.equals("Resolved") && code.equals("Not Completed") && ticketType.equals("Request")) {
+	    		} else if(state.equals("Resolved") && code.equals("Not Completed") && ticketType.equals("Incident")) {
 	    			lineReader.close();	
 	    			throw new IllegalArgumentException();
-	    		} else if(state.equals("Resolved") && code.equals("Solved") && ticketType.equals("Incident")) {
+	    		} else if(state.equals("Resolved") && code.equals("Solved") && ticketType.equals("Request")) {
 	    			lineReader.close();
 	    			throw new IllegalArgumentException();
 	    		}
