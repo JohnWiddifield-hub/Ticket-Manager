@@ -76,6 +76,7 @@ public class TicketReader {
 	    		if(lineReader.hasNext()) {
 	    			code = lineReader.next();
 	    		} else code = "";
+	    		
 	    		if(state.equals("Working") && code.contentEquals("Awaiting Caller")) {
 	    			lineReader.close();
 	    			throw new IllegalArgumentException();
@@ -92,6 +93,7 @@ public class TicketReader {
 	    			lineReader.close();
 	    			throw new IllegalArgumentException();
 	    		}
+	    		
 	    		lineReader.close();
 	    		
 	    	} else if(line.startsWith("-")) {

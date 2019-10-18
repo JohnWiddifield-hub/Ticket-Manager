@@ -127,10 +127,6 @@ public class Ticket {
 			this.ticketId = id;
 		} else throw new IllegalArgumentException();
 		
-		if(state.equals("Resolved") && code.equals("Not Completed") && ticketType.equals("Request")) {
-			throw new IllegalArgumentException();
-		} else if(state.equals("Resolved") && code.equals("Solved") && ticketType.equals("Incident"))
-			
 		if(state.contentEquals("New")) {
 			this.setState(state);
 		} else if (state.contentEquals("Working")) {
