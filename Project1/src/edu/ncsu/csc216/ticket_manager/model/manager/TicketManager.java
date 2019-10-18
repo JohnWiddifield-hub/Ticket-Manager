@@ -1,7 +1,6 @@
 package edu.ncsu.csc216.ticket_manager.model.manager;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import edu.ncsu.csc216.ticket_manager.model.command.Command;
 import edu.ncsu.csc216.ticket_manager.model.io.TicketReader;

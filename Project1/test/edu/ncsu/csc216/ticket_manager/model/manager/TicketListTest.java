@@ -28,7 +28,8 @@ public class TicketListTest {
 	@Test
 	public void testTicketList() {
 		list = new TicketList();
-		
+		TicketList list2 = new TicketList();
+		assertEquals(list.getTickets(), list2.getTickets());
 		list.getTickets();
 		
 	}
@@ -87,6 +88,7 @@ public class TicketListTest {
 		
 		ArrayList<Ticket> incidents = new ArrayList<Ticket>();
 		incidents = list.getTicketsByType(TicketType.INCIDENT);
+		assertEquals(incidents.size(), 1);
 	}
 
 	/**
