@@ -1,5 +1,6 @@
 package edu.ncsu.csc216.ticket_manager.model.manager;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import edu.ncsu.csc216.ticket_manager.model.command.Command;
@@ -15,12 +16,16 @@ import edu.ncsu.csc216.ticket_manager.model.ticket.Ticket.TicketType;
  *
  */
 public class TicketList {
-
+	
+	/** The list of tickets. */
+	private ArrayList<Ticket> tickets;
+	
 	/**
 	 * This is the default constructor which creates an empty list
 	 */
 	public TicketList() {
-		
+		tickets = new ArrayList<Ticket>();
+		Ticket.setCounter(1);
 	}
 	
 	/**
@@ -35,7 +40,12 @@ public class TicketList {
 	 */
 	public int addTicket(TicketType ticketType, String subject, String caller, Category category,
 			Priority priority, String note) {
-		return 0;
+		try {
+		tickets.add(new Ticket(ticketType, subject, caller, category, priority, note));
+		return 1;
+		} catch (Exception e) {
+			return -1;
+		}
 	}
 	
 	/**
@@ -43,6 +53,16 @@ public class TicketList {
 	 * @param list			List<Ticket> List of tickets to add
 	 */
 	public void addTickets(List<Ticket> list) {
+		int max = 0;
+		tickets.clear();
+		
+		for(int i = 0; i < list.size(); i++) {
+			tickets.add(list.get(i));
+			if(list.get(i).getTicketId() > max) {
+				max = list.get(i).getTicketId();
+			}
+		}
+		Ticket.setCounter(max + 1);
 		
 	}
 	
@@ -51,7 +71,7 @@ public class TicketList {
 	 * @return List<Ticket> list of Tickets
 	 */
 	public List<Ticket> getTickets(){
-		return null;
+		return tickets;
 	}
 	
 	/**
@@ -60,7 +80,13 @@ public class TicketList {
 	 * @return	list of tickets partaining to the specific type
 	 */
 	public List<Ticket> getTicketsByType(TicketType type){
-		return null;
+		ArrayList<Ticket> filtered = new ArrayList<Ticket>();
+		for(int i = 0; i < tickets.size(); i++) {
+			if(tickets.get(i).getTicketType() == type) {
+				filtered.add(tickets.get(i));
+			}
+		}
+		return filtered;
 	}
 	
 	/**
@@ -69,6 +95,11 @@ public class TicketList {
 	 * @return Ticket matching the id
 	 */
 	public Ticket getTicketById(int id) {
+		for(int i = 0; i < tickets.size(); i++) {
+			if(tickets.get(i).getTicketId() == id) {
+				return tickets.get(i);
+			}
+		}
 		return null;
 	}
 	
@@ -78,7 +109,7 @@ public class TicketList {
 	 * @param command		Command to execute on the Ticket
 	 */
 	public void executeCommand(int id, Command command) {
-		
+		getTicketById(id).update(command);
 	}
 	
 	/**
@@ -86,7 +117,11 @@ public class TicketList {
 	 * @param id			ID of the Ticket to delete
 	 */
 	public void deleteTicketById(int id) {
-		
+		for(int i = 0; i < tickets.size(); i++) {
+			if (tickets.get(i).getTicketId() == id) {
+				tickets.remove(i);
+			}
+		}
 	}
 	
 }
