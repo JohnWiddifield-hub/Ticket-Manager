@@ -1,6 +1,11 @@
 package edu.ncsu.csc216.ticket_manager.model.manager;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import edu.ncsu.csc216.ticket_manager.model.command.Command;
+import edu.ncsu.csc216.ticket_manager.model.io.TicketReader;
+import edu.ncsu.csc216.ticket_manager.model.io.TicketWriter;
 import edu.ncsu.csc216.ticket_manager.model.ticket.Ticket;
 import edu.ncsu.csc216.ticket_manager.model.ticket.Ticket.Category;
 import edu.ncsu.csc216.ticket_manager.model.ticket.Ticket.Priority;
@@ -15,6 +20,12 @@ import edu.ncsu.csc216.ticket_manager.model.ticket.Ticket.TicketType;
  *
  */
 public class TicketManager {
+	
+	private static TicketManager instance;
+	TicketList list = new TicketList();
+	TicketList loadedList = new TicketList();
+	TicketList newList = new TicketList();
+	TicketList typeList = new TicketList();
 
 	/**
 	 * Constructs the only TicketManager Object
@@ -28,7 +39,10 @@ public class TicketManager {
 	 * @return TicketManager object for the instance
 	 */
 	public static TicketManager getInstance() {
-		return null;
+		if (instance == null) {
+			instance = new TicketManager();
+			}
+			return instance;
 	}
 	
 	/**
@@ -36,6 +50,8 @@ public class TicketManager {
 	 * @param fileName			Name of the file to write the Tickets to
 	 */
 	public void saveTicketsToFile(String fileName) {
+		
+		TicketWriter.writeTicketFile(fileName, list.getTickets());
 		
 	}
 	
@@ -45,13 +61,17 @@ public class TicketManager {
 	 */
 	public void loadTicketsFromFile(String fileName) {
 		
+		ArrayList<Ticket> tempLoadedList;
+		tempLoadedList = TicketReader.readTicketFile(fileName);
+		loadedList.addTickets(tempLoadedList);
+		
 	}
 	
 	/**
 	 * Creates a new TicketList
 	 */
 	public void createNewTicketList() {
-		
+		newList = new TicketList();
 	}
 	
 	/**
@@ -59,7 +79,17 @@ public class TicketManager {
 	 * @return		2D String array for displaying the Tickets
 	 */
 	public String[][] getTicketsForDisplay(){
-		return null;
+		String[][] display = new String[list.getTickets().size()][5];
+		for(int i = 0; i < list.getTickets().size(); i++) {
+			display[i][0] = Integer.toString(list.getTicketById(i + 1).getTicketId());
+			display[i][1] = list.getTicketById(i + 1).getTicketTypeString();
+			display[i][2] = list.getTicketById(i + 1).getState();
+			display[i][3] = list.getTicketById(i + 1).getSubject();
+			display[i][4] = list.getTicketById(i + 1).getCategory();
+			display[i][5] = list.getTicketById(i + 1).getPriority();
+			
+		}
+		return display;
 	}
 	
 	/**
@@ -68,7 +98,25 @@ public class TicketManager {
 	 * @return		2D String array for displaying the Tickets
 	 */
 	public String[][] getTicketsForDisplayByType(TicketType ticketType) {
-		return null;
+		if(ticketType == null) {
+			throw new IllegalArgumentException();
+		}
+		
+		ArrayList<Ticket> tempTypeList;
+		tempTypeList = list.getTicketsByType(ticketType);
+		typeList.addTickets(tempTypeList);
+		
+		String[][] display = new String[typeList.getTickets().size()][5];
+		for(int i = 0; i < typeList.getTickets().size(); i++) {
+			display[i][0] = Integer.toString(typeList.getTicketById(i + 1).getTicketId());
+			display[i][1] = typeList.getTicketById(i + 1).getTicketTypeString();
+			display[i][2] = typeList.getTicketById(i + 1).getState();
+			display[i][3] = typeList.getTicketById(i + 1).getSubject();
+			display[i][4] = typeList.getTicketById(i + 1).getCategory();
+			display[i][5] = typeList.getTicketById(i + 1).getPriority();
+		}
+		
+		return display;
 	}
 	
 	/**
@@ -77,7 +125,7 @@ public class TicketManager {
 	 * @return				Ticket with matching ID
 	 */
 	public Ticket getTicketById(int id) {
-		return null;
+		return list.getTicketById(id);
 	}
 	
 	/**
@@ -86,7 +134,7 @@ public class TicketManager {
 	 * @param command		Command to perform on the Ticket
 	 */
 	public void executeCommand(int id, Command command) {
-		
+		list.executeCommand(id, command);
 	}
 	
 	/**
@@ -94,7 +142,7 @@ public class TicketManager {
 	 * @param id			ID of the Ticket to delete
 	 */
 	public void deleteTicketById(int id) {
-		
+		list.deleteTicketById(id);
 	}
 	
 	/**
@@ -108,6 +156,6 @@ public class TicketManager {
 	 */
 	public void addTicketToList(TicketType ticketType, String subject, String caller, Category category,
 			Priority priority, String note) {
-		
+		list.addTicket(ticketType, subject, caller, category, priority, note);
 	}
 }
