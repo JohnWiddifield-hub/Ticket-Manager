@@ -1,8 +1,6 @@
 package edu.ncsu.csc216.ticket_manager.model.io;
 
 import java.io.File;
-//import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.io.PrintStream;
 import java.util.List;
 
